@@ -1,17 +1,27 @@
 import React, {Component} from "react";
 import './App.css';
 import NavBar from "./Components/NavBar/NavBar";
-
+import {BrowserRouter} from "react-router-dom"
+import {Route} from "react-router-dom"
+import {Switch} from "react-router-dom" 
+import {Redirect} from "react-router-dom"
 
 //Pages
-import MainPage_hu6 from "./pages";
+import MainPage_hu6 from "./pages/MainPage/index";
 import NotFoundPage from "./pages/404";
-
 export default class App extends Component {
+  
   render(){
-    return (
-      <div className="App">
-        <NavBar />
+        return (
+        <div className="App">
+          <NavBar />
+          <BrowserRouter >
+            <Switch>
+              <Route exact path="/" component={MainPage_hu6} />
+              <Route exact path="/404" component={NotFoundPage} />
+              <Redirect to={"/404"} />
+            </Switch>
+          </BrowserRouter>
       </div>     
     );
   }
