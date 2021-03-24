@@ -11,7 +11,7 @@ export const MenuItem = [
     },
     {
         title: "Reserva de Espacios",
-        url: '#',
+        url: '/reserve',
         cName: 'nav-links'
     },
     {

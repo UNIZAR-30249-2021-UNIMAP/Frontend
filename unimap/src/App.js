@@ -12,6 +12,8 @@ import NotFoundPage from "./pages/404";
 import SignUp from "./pages/MainPage/SignUp"
 import SignIn from "./pages/MainPage/SignIn"
 import Report from "./pages/MainPage/Report"
+import Reserve from "./pages/MainPage/Reserve"
+
 export default class App extends Component {
   
   render(){
@@ -25,6 +27,7 @@ export default class App extends Component {
               <Route exact path="/signup" component={SignUp} />
               <Route exact path="/signin" component={SignIn} />
               <Route exact path="/report" component={Report} />
+              <Route exact path="/reserve" component={Reserve} />
               <Redirect to={"/404"} />
             </Switch>
           </BrowserRouter>

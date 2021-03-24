@@ -39,3 +39,19 @@
     width: 230px;
     height: 50px;
   }
+
+  dropdown{
+    margin-top: 25px;
+  }
+
+  dropdownItem{
+      background-color: white;
+      color:white;
+  }
+
+  buttonReserve{
+    margin-left: 300px;
+    display: flex;
+    width: 230px;
+    height: 50px;
+  }

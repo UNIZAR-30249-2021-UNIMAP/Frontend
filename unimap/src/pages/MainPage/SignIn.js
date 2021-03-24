@@ -22,6 +22,7 @@ export default function SignIn() {
         <input type="submit" value="LOGIN" />
         <div className="form-group">
         <a className="meh" href="/signup">
+        <br/>
         <label >¿No tienes cuenta? Regístrate </label>
         </a>
         </div>
