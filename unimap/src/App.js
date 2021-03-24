@@ -5,6 +5,8 @@ import {BrowserRouter} from "react-router-dom"
 import {Route} from "react-router-dom"
 import {Switch} from "react-router-dom" 
 import {Redirect} from "react-router-dom"
+import SignUp from "./pages/MainPage/SignUp"
+import SignIn from "./pages/MainPage/SignIn"
 
 //Pages
 import MainPage_hu6 from "./pages/MainPage/index";
@@ -19,6 +21,8 @@ export default class App extends Component {
             <Switch>
               <Route exact path="/" component={MainPage_hu6} />
               <Route exact path="/404" component={NotFoundPage} />
+              <Route exact path="/signup" component={SignUp} />
+              <Route exact path="/signin" component={SignIn} />
               <Redirect to={"/404"} />
             </Switch>
           </BrowserRouter>

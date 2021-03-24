@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import {MenuItem} from "./MenuItem";
 import './NavBar.css';
 import {Button} from "../Button"
-
+import {BrowserRouter} from "react-router-dom"
+import {Link} from "react-router-dom"
+import {Switch} from "react-router-dom" 
+import {Redirect} from "react-router-dom"
 class NavBar extends Component {
     state = { clicked: false}
 
@@ -13,7 +16,8 @@ class NavBar extends Component {
     render() {
         return(
             <nav className="NavBarItems">
-                <h1 className="navbar-logo">Unimap  <i className='fas fa-globe-europe'></i></h1>
+                <a className="meh" href="/">
+                <h1 className="navbar-logo">Unimap  <i className='fas fa-globe-europe'></i></h1></a>
                 <div className="menu-icon" onClick={
                     this.handleClick
                 }>
@@ -31,7 +35,10 @@ class NavBar extends Component {
                     })}
                     
                 </ul>
-                <Button>Sign Up</Button>
+                <a className="meh" href="/signin">
+                <Button>Sign In</Button>
+                </a>
+                
             </nav>
         )
     } 
