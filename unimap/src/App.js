@@ -5,12 +5,13 @@ import {BrowserRouter} from "react-router-dom"
 import {Route} from "react-router-dom"
 import {Switch} from "react-router-dom" 
 import {Redirect} from "react-router-dom"
-import SignUp from "./pages/MainPage/SignUp"
-import SignIn from "./pages/MainPage/SignIn"
 
 //Pages
 import MainPage_hu6 from "./pages/MainPage/index";
 import NotFoundPage from "./pages/404";
+import SignUp from "./pages/MainPage/SignUp"
+import SignIn from "./pages/MainPage/SignIn"
+import Report from "./pages/MainPage/Report"
 export default class App extends Component {
   
   render(){
@@ -23,6 +24,7 @@ export default class App extends Component {
               <Route exact path="/404" component={NotFoundPage} />
               <Route exact path="/signup" component={SignUp} />
               <Route exact path="/signin" component={SignIn} />
+              <Route exact path="/report" component={Report} />
               <Redirect to={"/404"} />
             </Switch>
           </BrowserRouter>

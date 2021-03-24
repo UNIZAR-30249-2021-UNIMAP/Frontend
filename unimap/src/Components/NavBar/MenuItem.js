@@ -6,7 +6,7 @@ export const MenuItem = [
     },
     {
         title: "Reportes de Incidencias",
-        url: '#',
+        url: '/report',
         cName: 'nav-links'
     },
     {
