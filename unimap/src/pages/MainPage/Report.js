@@ -10,19 +10,26 @@ import {State} from './Data'
 import {GreenIcon} from './Data'
 import {RedIcon} from './Data'
 import {OrangeIcon} from './Data'
+import './Report.css';
+
+import photo from './../../Assets/photo.png';
 
 
+const divStyle = {
+    display: 'flex',
+    alignItems: 'center'
+  };
 const Report = () => {  
     const positionRedIcon = [State.redIcon.lat, State.redIcon.lng];
     const positionGreenIcon = [State.greenIcon.lat, State.greenIcon.lng];
     const positionOrangeIcon = [State.orangeIcon.lat, State.orangeIcon.lng];
     return(
-        <Container>
-            <Row>
+        <div style={divStyle}>
+            <Container>
                 <Col>
-                    <Row>
-                    <h2>Localizacion</h2>
-                    <br/>
+                    <text>
+                    <h2>Localización</h2>
+                    </text>
                     <MapContainer className="mapSmall" center={positionGreenIcon} zoom={State.zoom}>
                         <TileLayer
                         attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -43,28 +50,39 @@ const Report = () => {
                             I am an orange leaf
                             </Popup>
                         </Marker>
-                    </MapContainer>
-                    </Row>
-                    <Row>
-
-                    </Row>
-                </Col>
-                <Col>
-                    <Row>
-
-                    </Row>
-                    <Row>
-
-                    </Row>
-                    <Row>
-                        <Col>
-                        </Col>
-                        <Col>
-                        </Col>
-                    </Row>
-                </Col>
-            </Row>
-        </Container>
+                    </MapContainer>  
+                    <text>                  
+                        <h2>Identificador del espacio</h2>
+                    </text>
+                    <text><textarea type="text" name="name" id="name"  cols="70" rows="7"/></text>
+                    </Col>
+                    </Container>
+                    <Container>
+                    <Col>
+                    <anothertext><h2>Descripción
+                        </h2>
+                    </anothertext>
+                    <description>
+                    <textarea type="text" name="name" id="name"  cols="70" rows="10"/>
+                    </description>
+                    <anothertext><h2>Email
+                        </h2>
+                    </anothertext>
+                    <anothertext>
+                        <textarea type="text" name="name" id="name"  cols="70" rows="3"/>
+                    </anothertext>
+                    <div style={divStyle}>
+                        <image><img src={photo} />
+                    </image>
+                    <buttonReport>
+                        <input type="submit" value="       Enviar       " size="20" />
+                        </buttonReport>                    
+                    </div>                    
+                    </Col>
+                    </Container>
+                    
+                    </div>
+                   
     );
 }
 
