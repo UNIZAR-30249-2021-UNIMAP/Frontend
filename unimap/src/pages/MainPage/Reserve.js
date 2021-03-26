@@ -11,6 +11,7 @@ import {GreenIcon} from './Data'
 import {RedIcon} from './Data'
 import {OrangeIcon} from './Data'
 import './Report.css';
+import './Select.css';
 
 const divStyle = {
     display: 'flex',
@@ -33,53 +34,36 @@ const Reserve = () => {
                     </text>
             </Col>
             <dropdown>
-            <Dropdown> <Dropdown.Toggle variant="success" id="dropdown-basic">
-                Proyector
-            </Dropdown.Toggle>
-
-            <Dropdown.Menu>
-           
-                <Row> <dropdownItem><Dropdown.Item href="#/action-1">Sí</Dropdown.Item></dropdownItem></Row>
-                <Row><dropdownItem><Dropdown.Item href="#/action-2">No</Dropdown.Item></dropdownItem></Row>
-                <Row><dropdownItem><Dropdown.Item href="#/action-3">Indiferente</Dropdown.Item></dropdownItem></Row>
-            </Dropdown.Menu>
-            </Dropdown>
+            <div class="sidebar-box"><select id="equipo">
+                    <option value="">Con proyector</option>
+                    <option value="">Sin proyector</option>
+                    <option value="">Indiferente</option>
+                </select></div>
+            
             </dropdown>
             
             <dropdown>
-            <Dropdown> <Dropdown.Toggle variant="success" id="dropdown-basic">
-                Edificio
-            </Dropdown.Toggle>
-
-            <Dropdown.Menu>
-                <Row><dropdownItem><Dropdown.Item href="#/action-1">Ada Byron</Dropdown.Item></dropdownItem></Row>
-                <Row><dropdownItem><Dropdown.Item href="#/action-2">Torres Quevedo</Dropdown.Item></dropdownItem></Row>
-                <Row><dropdownItem><Dropdown.Item href="#/action-3">Betancourt</Dropdown.Item></dropdownItem></Row>
-            </Dropdown.Menu></Dropdown>
+            <div class="sidebar-box"><select id="equipo">
+                    <option value="">Ada Byron</option>
+                    <option value="">Torres Quevedo</option>
+                    <option value="">Betancourt</option>
+                </select></div>
             </dropdown>
 
             <dropdown>
-            <Dropdown> <Dropdown.Toggle variant="success" id="dropdown-basic">
-                Planta
-            </Dropdown.Toggle>
-
-            <Dropdown.Menu>
-                <Row><dropdownItem><Dropdown.Item href="#/action-1">0</Dropdown.Item></dropdownItem></Row>
-                <Row><dropdownItem><Dropdown.Item href="#/action-2">1</Dropdown.Item></dropdownItem></Row>
-                <Row><dropdownItem><Dropdown.Item href="#/action-3">2</Dropdown.Item></dropdownItem></Row>
-                <Row><dropdownItem><Dropdown.Item href="#/action-3">Indiferente</Dropdown.Item></dropdownItem></Row>                
-            </Dropdown.Menu></Dropdown>
+            <div class="sidebar-box"><select id="equipo">
+                    <option value="">Planta 0</option>
+                    <option value="">Planta 1</option>
+                    <option value="">Planta 2</option>
+                    <option value="">Indiferente</option>
+                </select></div>
             </dropdown>
 
             <dropdown>
-            <Dropdown> <Dropdown.Toggle variant="success" id="dropdown-basic">
-                Tipo de sala
-            </Dropdown.Toggle>
-
-            <Dropdown.Menu>
-            <Row><dropdownItem><Dropdown.Item href="#/action-1">Aula</Dropdown.Item></dropdownItem></Row>
-            <Row><dropdownItem><Dropdown.Item href="#/action-2">Laboratorio</Dropdown.Item></dropdownItem></Row>
-            </Dropdown.Menu></Dropdown>
+            <div class="sidebar-box"><select id="equipo">
+                    <option value="">Aula</option>
+                    <option value="">Laboratorio</option>
+                </select></div>
             </dropdown>
             </div>
             </Row>
