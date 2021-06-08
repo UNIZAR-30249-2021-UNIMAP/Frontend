@@ -31,7 +31,6 @@ function AddMarkerToClick() {
       const newMarker = e.latlng;
       //setMarkers(newMarker);
       console.log("El markador es: " +newMarker);
-      console.log("La capa final es" +layer); 
       var res = proj4(epsg, [e.latlng.lng,e.latlng.lat]);
       console.log("Coordenadas: " +res)
       //var longitud = e.latlng.lng * 675734.506429 / -0.88853
