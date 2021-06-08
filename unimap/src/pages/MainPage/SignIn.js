@@ -1,27 +1,36 @@
 import React, { useState } from "react";
 import './SignUp.css';
-import login from './controllers';
+import swal from 'sweetalert';
 import axios from 'axios'
-function handleButton(correo, pass){
-  console.log("email "+correo)
-  axios.request({
-    url: 'http://localhost:7000/login?email='+correo+'&contrasena='+pass,
-    method: 'post',
-    data: {
-        'email': correo,
-        'contrasena': pass,
-    },
 
-})
-    .then(res => {
-      const persons = res.data;
-      console.log("El endpoint nos devuelve: "+res.data)
-    })
-  }
 export default function SignIn() {
   var [correo, setEmail] =useState("");
   var [pass, setPass] = useState("");
 
+  const handleButton = async e =>{
+    e.preventDefault();
+    console.log("email "+correo)
+    const response = axios.request({
+      url: 'http://localhost:7000/login?email='+correo+'&contrasena='+pass,
+      method: 'get',
+      data: {
+          'email': correo,
+          'contrasena': pass,
+      },
+  }).then(res => {
+        if(!res.data){
+          console.log("Error")
+          swal({
+            title: "Error",
+            text: "Usuario o contraseña incorrectos.",
+            icon: "error"
+          });
+        }else{
+          console.log("El endpoint nos devuelve: "+res.data)
+        }
+      })
+      console.log(response)
+    }
     
   return(
     <form>
@@ -36,7 +45,7 @@ export default function SignIn() {
           <label htmlFor="password">Contraseña: </label>
           <input type="password" value={pass} onChange={e => setPass(e.target.value)}/>
         </div>
-        <input type="submit" value="LOGIN" onClick={handleButton(correo, pass)}/>
+        <button onClick={handleButton}style={{backgroundColor: "#FE4880"} }> Login </button>
         <div className="form-group">
         <a className="meh" href="/signup">
         <br/>

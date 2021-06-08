@@ -1,19 +1,43 @@
-import React from "react";
+import React,  { useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 
 import {MapContainer} from 'react-leaflet';
 import {TileLayer} from 'react-leaflet'; 
-import {Marker} from 'react-leaflet'; 
-import {Popup} from 'react-leaflet'; 
+import { useMapEvents } from 'react-leaflet'
+import { Marker, Popup } from 'react-leaflet'
+import { MarkerIcon } from './react-leaflet-icon.js'
 
 import {State} from './Data'
-import {GreenIcon} from './Data'
-import {RedIcon} from './Data'
-import {OrangeIcon} from './Data'
 import './Report.css';
 
 import photo from './../../Assets/photo.png';
 
+function AddMarkerToClick() {
+
+  const [markers, setMarkers] = useState({ lat: -34.397, lng: 150.644 });
+  const [layer, setLayer] = useState("");
+
+  const map = useMapEvents({
+    click(e) {
+      const newMarker = e.latlng;
+      setMarkers(newMarker);
+      console.log("El markador es: " +newMarker);
+      console.log("La capa final es" +layer); 
+    },
+  })
+
+  map.on('baselayerchange', function (e) {
+    const currentLayerID = e.layer.getAttribution();    
+    setLayer(currentLayerID);         
+ });
+
+  return (
+    <>
+        <Marker position={markers} icon={MarkerIcon}>          
+        </Marker>
+    </>
+  )
+}
 
 const divStyle = {
     display: 'flex',
@@ -31,30 +55,16 @@ const Report = () => {
                     <h2>Localización</h2>
                     </text>
                     <MapContainer className="mapSmall" center={positionGreenIcon} zoom={State.zoom}>
+                        <AddMarkerToClick></AddMarkerToClick>
                         <TileLayer
                         attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         />
-                        <Marker position={positionGreenIcon} icon={GreenIcon}>
-                            <Popup>
-                            I am a green leaf
-                            </Popup>
-                        </Marker>
-                        <Marker position={positionRedIcon} icon={RedIcon}>
-                            <Popup>
-                            I am a red leaf
-                            </Popup>
-                        </Marker>
-                        <Marker position={positionOrangeIcon} icon={OrangeIcon}>
-                            <Popup>
-                            I am an orange leaf
-                            </Popup>
-                        </Marker>
                     </MapContainer>  
                     <text>                  
                         <h2>Identificador del espacio</h2>
                     </text>
-                    <text><textarea type="text" name="name" id="name"  cols="70" rows="7"/></text>
+                    <text><textarea type="text" name="name" id="name"  cols="70" rows="7" disabled="true"/></text>
                     </Col>
                     </Container>
                     <Container>
