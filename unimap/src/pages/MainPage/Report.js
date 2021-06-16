@@ -11,6 +11,7 @@ import axios from 'axios'
 import proj4 from "proj4"
 import {State} from './Data'
 import './Report.css';
+import swal from 'sweetalert';
 
 import photo from './../../Assets/photo.png';
 
@@ -116,6 +117,23 @@ const Report = () => {
       const handleButton = async e =>{
         e.preventDefault();
         console.log("El email es"+email + " y la descripción es " +description)
+
+        const response = axios.request({
+          url: 'http://localhost:7000/incidencia?email='+email+'&descripcion='+description+'&idEspacio='+idEspacio,
+          method: 'post',
+      }).then(res => {
+            if(!res.data){
+              console.log("Error")
+              swal({
+                title: "Error",
+                text: "No se pudo realizar la petición.",
+                icon: "error"
+              });
+            }else{
+              console.log("El endpoint nos devuelve: "+res.data)
+            }
+          })
+          console.log(response)
         }
     return(
         <div style={divStyle}>

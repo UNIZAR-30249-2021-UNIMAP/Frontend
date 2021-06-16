@@ -1,4 +1,4 @@
-import React from "react";
+import React,  { useState } from "react";
 import { Col, Container, Dropdown, Row } from "react-bootstrap";
 
 import {MapContainer} from 'react-leaflet';
@@ -12,6 +12,7 @@ import {RedIcon} from './Data'
 import {OrangeIcon} from './Data'
 import './Report.css';
 import './Select.css';
+import DatePicker from "react-datepicker";
 
 const divStyle = {
     display: 'flex',
@@ -21,6 +22,7 @@ const Reserve = () => {
     const positionRedIcon = [State.redIcon.lat, State.redIcon.lng];
     const positionGreenIcon = [State.greenIcon.lat, State.greenIcon.lng];
     const positionOrangeIcon = [State.orangeIcon.lat, State.orangeIcon.lng];
+    const [startDate, setStartDate] = useState(new Date());
     return(
         
         <Col>
@@ -65,6 +67,7 @@ const Reserve = () => {
                     <option value="">Laboratorio</option>
                 </select></div>
             </dropdown>
+            <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
             </div>
             </Row>
             <Row>
