@@ -3,8 +3,11 @@
     text-align: left;
     position: relative;
     display: flex;
-    margin-left: 30px;
+    margin-left: 10px;
     color: #fff;
+    height: "370";
+    size: "180";
+    resize: none;
   }
 
   anothertext{
@@ -14,11 +17,12 @@
     margin-left: 150px;
     color: #fff;
     margin-top: 20px;
+    resize: none;
   }
 
   description{
     width: 100%;
-    height: 300px;
+    height: 200px;
     position: relative;
     display: flex;
     margin-left: 150px;
