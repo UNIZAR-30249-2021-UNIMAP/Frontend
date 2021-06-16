@@ -34,6 +34,7 @@ const Report = () => {
     const [description, setDescription] = useState("");
     const [email, setEmail] = useState("");
     const [idEspacio, setIdEspacio] = useState("Seleccione un espacio")
+    
     function AddMarkerToClick() {
         
         const [markers, setMarkers] = useState({ lat: -34.397, lng: 150.644 });
