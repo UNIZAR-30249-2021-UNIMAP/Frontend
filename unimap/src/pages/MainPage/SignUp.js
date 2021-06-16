@@ -1,57 +1,62 @@
 import React, { useState } from "react";
 import './SignUp.css';
 import swal from 'sweetalert';
-import axios from 'axios'
+import axios from 'axios';
+
+
+
 
 export default function SignUp() {
 
-  var [correo, setEmail] =useState("");
+  var [correo, setEmail] = useState("");
   var [pass, setPass] = useState("");
   var [usuario, setUsuario] = useState("");
+  const [startDate, setStartDate] = useState(new Date());
 
-  const handleButton = async e =>{
+
+  const handleButton = async e => {
     e.preventDefault();
-    console.log("email "+correo)
+    console.log("email " + correo)
     const response = axios.request({
-      url: 'http://localhost:7000/registro?email='+correo+'&contrasena='+pass+'&nombreUsuario='+usuario,
+      url: 'http://localhost:7000/registro?email=' + correo + '&contrasena=' + pass + '&nombreUsuario=' + usuario,
       method: 'post',
-  }).then(res => {
-        if(!res.data){
-          console.log("Error")
-          swal({
-            title: "Error",
-            text: "Usuario o correo ya existe.",
-            icon: "error"
-          });
-        }else{
-          console.log("El endpoint nos devuelve: "+res.data)
-        }
-      })
-      console.log(response)
-    }
-  return(
+    }).then(res => {
+      if (!res.data) {
+        console.log("Error")
+        swal({
+          title: "Error",
+          text: "Usuario o correo ya existe.",
+          icon: "error"
+        });
+      } else {
+        console.log("El endpoint nos devuelve: " + res.data)
+      }
+    })
+    console.log(response)
+  }
+  return (
     <form>
       <div className="form-inner">
         <h2>Registro</h2>
         {/* ERROR! */}
         <div className="form-group">
           <label htmlFor="name">Nombre de usuario:</label>
-          <input type="text" name="name" value={usuario} onChange={e => setUsuario(e.target.value)}/>
+          <input type="text" name="name" value={usuario} onChange={e => setUsuario(e.target.value)} />
         </div>
         <div className="form-group">
           <label htmlFor="email">Email: </label>
-          <input type="email" name="email" value={correo} onChange={e => setEmail(e.target.value)}/>
+          <input type="email" name="email" value={correo} onChange={e => setEmail(e.target.value)} />
         </div>
         <div className="form-group">
           <label htmlFor="password">Contraseña: </label>
-          <input type="password" name="pwassword" value={pass} onChange={e => setPass(e.target.value)}/>
+          <input type="password" name="pwassword" value={pass} onChange={e => setPass(e.target.value)} />
         </div>
-        <button onClick={handleButton}style={{backgroundColor: "#FE4880"} }> Registrarse </button>
+        <button onClick={handleButton} style={{ backgroundColor: "#FE4880" }}> Registrarse </button>
         <div className="form-group">
-        <a className="meh" href="/signin">
-          <br/>
-        <label >¿Ya tienes cuenta? Inicia sesión </label>
-        </a>
+          <a className="meh" href="/signin">
+            <br />
+            <label >¿Ya tienes cuenta? Inicia sesión </label>
+          </a>
         </div>
       </div>
     </form>
