@@ -5,5 +5,5 @@ import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 export const MarkerIcon = L.icon({
     iconUrl: icon,
     shadowUrl: iconShadow
-    
+
 });

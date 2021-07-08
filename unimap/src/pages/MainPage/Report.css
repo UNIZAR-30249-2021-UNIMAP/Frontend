@@ -1,5 +1,4 @@
-
-  text{
+text {
     text-align: left;
     position: relative;
     display: flex;
@@ -8,9 +7,9 @@
     height: "370";
     size: "180";
     resize: none;
-  }
+}
 
-  anothertext{
+anothertext {
     text-align: center;
     position: relative;
     display: flex;
@@ -18,44 +17,44 @@
     color: #fff;
     margin-top: 20px;
     resize: none;
-  }
+}
 
-  description{
+description {
     width: 100%;
     height: 200px;
     position: relative;
     display: flex;
     margin-left: 150px;
     margin-top: 10px;
-  }
+}
 
-  image{
+image {
     position: relative;
     display: flex;
     margin-left: 150px;
     margin-top: 10px;
     size: 2;
-  }
+}
 
-  buttonReport{
+buttonReport {
     margin-left: 350px;
     display: flex;
     width: 230px;
     height: 50px;
-  }
+}
 
-  dropdown{
+dropdown {
     margin-top: 25px;
-  }
+}
 
-  dropdownItem{
-      background-color: white;
-      color:white;
-  }
+dropdownItem {
+    background-color: white;
+    color: white;
+}
 
-  buttonReserve{
+buttonReserve {
     margin-left: 300px;
     display: flex;
     width: 230px;
     height: 50px;
-  }
+}

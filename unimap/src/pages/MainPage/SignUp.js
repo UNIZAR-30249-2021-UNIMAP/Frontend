@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import './SignUp.css';
-import swal from 'sweetalert';
-import axios from 'axios';
+import { Register } from "../Endpointscalls";
 
 
 
@@ -16,23 +15,7 @@ export default function SignUp() {
 
   const handleButton = async e => {
     e.preventDefault();
-    console.log("email " + correo)
-    const response = axios.request({
-      url: 'http://localhost:7000/registro?email=' + correo + '&contrasena=' + pass + '&nombreUsuario=' + usuario,
-      method: 'post',
-    }).then(res => {
-      if (!res.data) {
-        console.log("Error")
-        swal({
-          title: "Error",
-          text: "Usuario o correo ya existe.",
-          icon: "error"
-        });
-      } else {
-        console.log("El endpoint nos devuelve: " + res.data)
-      }
-    })
-    console.log(response)
+    Register(correo, pass, usuario);
   }
   return (
     <form>
