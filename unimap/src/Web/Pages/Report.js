@@ -1,17 +1,16 @@
 import React, { useState } from "react";
-import { Col, Container} from "react-bootstrap";
+import { Col, Container } from "react-bootstrap";
 
 import { useMapEvents } from 'react-leaflet'
 import { Marker, Popup } from 'react-leaflet'
-import { MarkerIcon } from './react-leaflet-icon.js'
-import { WMSTileLayer, LayersControl } from 'react-leaflet';
+import { MarkerIcon } from '../../Utils/react-leaflet-icon.js'
 import proj4 from "proj4"
-import './Report.css';
+import '../Styles/Report.css';
 
-import Map from "./map"
+import Map from "../../Utils/map"
 
 import photo from './../../Assets/photo.png';
-import { getNameClass } from "../Endpointscalls.js";
+import { getNameClass } from "../../Utils/Endpointscalls";
 
 const epsg = "+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"
 const PLANTA_CALLE = 'proyecto:adap00,proyecto:torresp00,proyecto:betanp00'
@@ -99,37 +98,35 @@ const Report = () => {
     Report(email, description, Map.idEspacio);
   }
   return (
+
     <div style={divStyle}>
-      <Container>
-        <Map />
-      </Container>
-      <Container>
-        <Col>
-          <anothertext><h2>Descripción
-          </h2>
-          </anothertext>
-          <description>
-            <textarea type="text" name="name" id="name" cols="70" rows="10" size="50" value={description} onChange={e => setDescription(e.target.value)} />
-          </description>
-          <anothertext><h2>Email
-          </h2>
-          </anothertext>
-          <anothertext>
-            <input type="text" name="name" id="name" cols="70" rows="10" size="50" value={email} onChange={e => setEmail(e.target.value)} />
-          </anothertext>
-          <div style={divStyle}>
-            <image><img src={photo} />
-            </image>
-            <buttonReport>
-              <input type="submit" value="       Enviar       " size="20" onClick={handleButton} />
-            </buttonReport>
-          </div>
-        </Col>
-      </Container>
+      {Map("mapSmall")}
+      <Col>
+        <anothertext><h2>Descripción
+        </h2>
+        </anothertext>
+        <description>
+          <textarea type="text" name="name" id="name" cols="70" rows="10" size="50" value={description} onChange={e => setDescription(e.target.value)} />
+        </description>
+        <anothertext><h2>Email
+        </h2>
+        </anothertext>
+        <anothertext>
+          <input type="text" name="name" id="name" cols="70" rows="10" size="50" value={email} onChange={e => setEmail(e.target.value)} />
+        </anothertext>
+        <div style={divStyle}>
+          <image><img src={photo} />
+          </image>
+          <buttonReport>
+            <input type="submit" value="       Enviar       " size="20" onClick={handleButton} />
+          </buttonReport>
+        </div>
+      </Col>
 
-    </div>
-
+    </div >
   );
+
+
 }
 
 export default Report;

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import './SignUp.css';
-import { Register } from "../Endpointscalls";
+import { Register } from "../../Utils/Endpointscalls";
+import '../Styles/SignUp.css';
+
 
 
 
@@ -10,8 +11,6 @@ export default function SignUp() {
   var [correo, setEmail] = useState("");
   var [pass, setPass] = useState("");
   var [usuario, setUsuario] = useState("");
-  const [startDate, setStartDate] = useState(new Date());
-
 
   const handleButton = async e => {
     e.preventDefault();

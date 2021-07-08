@@ -1,18 +1,14 @@
 import React, { useState } from "react";
-import { Col, FormControl, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import { Checkbox } from '@material-ui/core';
 
-import { MapContainer } from 'react-leaflet';
-import { TileLayer } from 'react-leaflet';
-import { Marker } from 'react-leaflet';
-import { Popup } from 'react-leaflet';
 
 import { State } from './Data'
-import { GreenIcon } from './Data'
-import { RedIcon } from './Data'
-import { OrangeIcon } from './Data'
-import './Report.css';
-import './Select.css';
+
+import Map from "../../Utils/map"
+
+import '../Styles/Report.css';
+import '../Styles/Select.css';
 
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
@@ -102,12 +98,7 @@ const Reserve = () => {
             </Row>
             <Row>
                 <div style={divStyle}>
-                    <MapContainer className="mapMedium" center={positionGreenIcon} zoom={State.zoom}>
-                        <TileLayer
-                            attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                        />
-                    </MapContainer>
+                    {Map("mapMedium")}
 
                     <Col>
                         <anothertext><h2>Espacio

@@ -7,12 +7,12 @@ import { Switch } from "react-router-dom"
 import { Redirect } from "react-router-dom"
 
 //Pages
-import MainPage_hu6 from "./pages/MainPage/MainPage";
-import NotFoundPage from "./pages/404";
-import SignUp from "./pages/MainPage/SignUp"
-import SignIn from "./pages/MainPage/SignIn"
-import Report from "./pages/MainPage/Report"
-import Reserve from "./pages/MainPage/Reserve"
+import MainPage_hu6 from "./Web/Pages/MainPage";
+import NotFoundPage from "./Web/Pages/404";
+import SignUp from "./Web/Pages/SignUp"
+import SignIn from "./Web/Pages/SignIn"
+import Report from "./Web/Pages/Report"
+import Reserve from "./Web/Pages/Reserve"
 
 export default class App extends Component {
 

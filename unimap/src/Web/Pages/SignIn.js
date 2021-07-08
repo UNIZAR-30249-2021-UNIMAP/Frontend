@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import './SignUp.css';
-import { Login } from "../Endpointscalls";
+import '../Styles/SignUp.css';
+import { Login } from "../../Utils/Endpointscalls";
 
 export default function SignIn() {
   var [correo, setEmail] = useState("");

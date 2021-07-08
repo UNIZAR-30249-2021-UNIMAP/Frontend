@@ -6,8 +6,7 @@ import { Marker, Popup } from 'react-leaflet'
 import { MarkerIcon } from './react-leaflet-icon.js'
 import { WMSTileLayer, LayersControl } from 'react-leaflet';
 import proj4 from "proj4"
-import './Report.css';
-import { getNameClass } from "../Endpointscalls.js";
+import { getNameClass } from "./Endpointscalls.js";
 
 const geoserverUrl = "http://35.195.165.185:8080/geoserver/wms?service=WMS"
 const epsg = "+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"
@@ -20,7 +19,7 @@ const PLANTA4 = 'proyecto:adap04'
 const SOTANO1 = 'proyecto:adas01,proyecto:torress01,proyecto:betans01'
 const { BaseLayer, Overlay } = LayersControl;
 
-const Map = () => {
+const Map = (size) => {
     const [idEspacio, setIdEspacio] = useState("Seleccione un espacio")
 
     function AddMarkerToClick() {
@@ -81,9 +80,8 @@ const Map = () => {
             </>
         )
     }
-    return (
-
-        <MapContainer className="mapSmall" id="map" center={[41.68366, -0.88735]} zoom={50}
+    return  (
+        <MapContainer className={size=="map"?"map":"mapSmall"} id="map" center={[41.68366, -0.88735]} zoom={50}
             zoomControl={false}>
             <AddMarkerToClick></AddMarkerToClick>
             <LayersControl position="topright">
