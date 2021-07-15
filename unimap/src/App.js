@@ -13,6 +13,7 @@ import SignUp from "./Web/Pages/SignUp"
 import SignIn from "./Web/Pages/SignIn"
 import Report from "./Web/Pages/Report"
 import Reserve from "./Web/Pages/Reserve"
+import AssignTask from "./Web/Pages/AssignTask"
 
 export default class App extends Component {
 
@@ -28,6 +29,7 @@ export default class App extends Component {
             <Route exact path="/signin" component={SignIn} />
             <Route exact path="/report" component={Report} />
             <Route exact path="/reserve" component={Reserve} />
+            <Route exact path="/assingtask" component={AssignTask} />
             <Redirect to={"/404"} />
           </Switch>
         </BrowserRouter>

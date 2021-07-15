@@ -41,7 +41,7 @@ export const Register = (correo, pass, usuario) => {
   })
 }
 export const getNameClass = (planta, res) => {
-  const response = axios.request({
+  axios.request({
     url: 'http://35.195.165.185:8080/geoserver/proyecto/ows?service' +
       '=WFS&version=1.0.0&request=GetFeature&typeName=' + planta + '&outputFormat=application%2Fjson&BBOX='
       + res[0] + ',' + res[1] + ',' + res[0] + ',' + res[1] + '&propertyName=id',
@@ -78,4 +78,38 @@ export const Report = (email, description, idEspacio) => {
   })
 }
 
+export const Accept = (idIncidencia, idEmpleado, prioridad) => {
+  return axios.request({
+    url: 'http://localhost:7000//incidencia/administrador?idIncidencia=' + idIncidencia + '&idEmpleado=' + idEmpleado + '&prioridad=' + prioridad + '&aceptar=' + "aceptar" + '&motivo=' + null,
+    method: 'post',
+  }).then(res => {
+    if (!res.data) {
+      console.log("Error")
+      swal({
+        title: "Error",
+        text: "No se a podidio realizar la operacion",
+        icon: "error"
+      });
+    } else {
+      console.log("Incidencia asignada: " + res.data)
+    }
+  })
+}
 
+export const Deny = (idIncidencia, motivo) => {
+  return axios.request({
+    url: 'http://localhost:7000//incidencia/administrador?idIncidencia=' + idIncidencia + '&idEmpleado=' + null + '&prioridad=' + null + '&aceptar=' + "denegar" + '&motivo=' + motivo,
+    method: 'post',
+  }).then(res => {
+    if (!res.data) {
+      console.log("Error")
+      swal({
+        title: "Error",
+        text: "No se a podidio realizar la operacion",
+        icon: "error"
+      });
+    } else {
+      console.log("Incidencia denegada: " + res.data)
+    }
+  })
+}

@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import {MenuItem} from "./MenuItem";
 import './NavBar.css';
 import {Button} from "../Button"
-import {BrowserRouter} from "react-router-dom"
-import {Link} from "react-router-dom"
-import {Switch} from "react-router-dom" 
-import {Redirect} from "react-router-dom"
 class NavBar extends Component {
     state = { clicked: false}
 

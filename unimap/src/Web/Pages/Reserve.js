@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { Checkbox } from '@material-ui/core';
 
-
-import { State } from './Data'
-
 import Map from "../../Utils/map"
 
 import '../Styles/Report.css';
@@ -21,9 +18,6 @@ const divStyle = {
     alignItems: 'center'
 };
 const Reserve = () => {
-    const positionRedIcon = [State.redIcon.lat, State.redIcon.lng];
-    const positionGreenIcon = [State.greenIcon.lat, State.greenIcon.lng];
-    const positionOrangeIcon = [State.orangeIcon.lat, State.orangeIcon.lng];
     const [startDate, setStartDate] = useState(new Date());
     return (
 

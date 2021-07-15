@@ -10,17 +10,16 @@ import { getNameClass } from "./Endpointscalls.js";
 
 const geoserverUrl = "http://35.195.165.185:8080/geoserver/wms?service=WMS"
 const epsg = "+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"
-const from = "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext  +no_defs"
 const PLANTA_CALLE = 'proyecto:adap00,proyecto:torresp00,proyecto:betanp00'
 const PLANTA1 = 'proyecto:adap01,proyecto:torresp01,proyecto:betanp01'
 const PLANTA2 = 'proyecto:adap02,proyecto:torresp02,proyecto:betanp02'
 const PLANTA3 = 'proyecto:adap03,proyecto:torresp03,proyecto:betanp03'
 const PLANTA4 = 'proyecto:adap04'
 const SOTANO1 = 'proyecto:adas01,proyecto:torress01,proyecto:betans01'
-const { BaseLayer, Overlay } = LayersControl;
+const { BaseLayer} = LayersControl;
 
 const Map = (size) => {
-    const [idEspacio, setIdEspacio] = useState("Seleccione un espacio")
+    const [idEspacio,setIdEspacio] = useState("Seleccione un espacio")
 
     function AddMarkerToClick() {
 
@@ -81,7 +80,7 @@ const Map = (size) => {
         )
     }
     return  (
-        <MapContainer className={size=="map"?"map":"mapSmall"} id="map" center={[41.68366, -0.88735]} zoom={50}
+        <MapContainer className={size==="map"?"map":"mapSmall"} id="map" center={[41.68366, -0.88735]} zoom={50}
             zoomControl={false}>
             <AddMarkerToClick></AddMarkerToClick>
             <LayersControl position="topright">
