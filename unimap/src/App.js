@@ -14,6 +14,8 @@ import SignIn from "./Web/Pages/SignIn"
 import Report from "./Web/Pages/Report"
 import Reserve from "./Web/Pages/Reserve"
 import AssignTask from "./Web/Pages/AssignTask"
+import AssignCapacity from "./Web/Pages/AssignCapacity";
+import AssistanceCheck from "./Web/Pages/AssistanceCheck";
 
 export default class App extends Component {
 
@@ -30,6 +32,8 @@ export default class App extends Component {
             <Route exact path="/report" component={Report} />
             <Route exact path="/reserve" component={Reserve} />
             <Route exact path="/assingtask" component={AssignTask} />
+            <Route exact path="/assingcapacity" component={AssignCapacity} />
+            <Route exact path="/assistance" component={AssistanceCheck} />
             <Redirect to={"/404"} />
           </Switch>
         </BrowserRouter>
