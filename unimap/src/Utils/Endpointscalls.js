@@ -113,3 +113,76 @@ export const Deny = (idIncidencia, motivo) => {
     }
   })
 }
+
+//TODO Discutir param
+export const GetIncidenciasMant = () => {
+  return axios.request({
+    url: 'http://localhost:7000//incidencia/mantenimiento',
+    method: 'get',
+  }).then(res => {
+    if (!res.data) {
+      console.log("Error")
+      swal({
+        title: "Error",
+        text: "No se a podidio realizar la operacion",
+        icon: "error"
+      });
+    } else {
+      console.log("Incidencias devueltas: " + res.data)
+    }
+  })
+}
+
+export const FinIncidenciaMant = (idIncidencia) => {
+  return axios.request({
+    url: 'http://localhost:7000//incidencia/mantenimiento',
+    method: 'post',
+  }).then(res => {
+    if (!res.data) {
+      console.log("Error")
+      swal({
+        title: "Error",
+        text: "No se a podidio realizar la operacion",
+        icon: "error"
+      });
+    } else {
+      console.log("Incidencias finalizada: " + res.data)
+    }
+  })
+}
+
+export const GetMant = () => {
+  return axios.request({
+    url: 'http://localhost:7000//mantenimiento',
+    method: 'get',
+  }).then(res => {
+    if (!res.data) {
+      console.log("Error")
+      swal({
+        title: "Error",
+        text: "No se a podidio realizar la operacion",
+        icon: "error"
+      });
+    } else {
+      console.log("Lista devuelta: " + res.data)
+    }
+  })
+}
+
+export const GetEspacio = (idEspacio) => {
+  return axios.request({
+    url: 'http://localhost:7000//espacio?idSala='+idEspacio,
+    method: 'get',
+  }).then(res => {
+    if (!res.data) {
+      console.log("Error")
+      swal({
+        title: "Error",
+        text: "No se a podidio realizar la operacion",
+        icon: "error"
+      });
+    } else {
+      console.log("Info espacio devueltas: " + res.data)
+    }
+  })
+}
