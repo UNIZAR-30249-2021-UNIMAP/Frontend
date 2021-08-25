@@ -18,7 +18,8 @@ const divStyle = {
     alignItems: 'center'
 };
 const Reserve = () => {
-    const [startDate, setStartDate] = useState(new Date());
+    const [startDate, setStartDate] = useState(null);
+    const [endDate, setEndDate] = useState(null);
     return (
 
         <Col>
@@ -78,10 +79,10 @@ const Reserve = () => {
                             <h2>Fecha fin</h2>
                         </text>
                         <DatePicker
-                            selected={startDate}
-                            onChange={(date) => setStartDate(date)}
+                            selected={endDate}
+                            onChange={(date) => setEndDate(date)}
                             showTimeSelect
-                            dateFormat="Pp" />
+                            dateFormat="Pp"/>
                     </Col>
                     <FormControlLabel
                         control={<Checkbox />}
@@ -124,7 +125,7 @@ const Reserve = () => {
                             </Col>
 
                             <buttonReserve>
-                                <input type="submit" value="       Reservar espacio       " size="20" />
+                                <input type="submit" onSubmit={console.log(startDate)} value="       Reservar espacio       " size="20" />
                             </buttonReserve>
                         </div>
                     </Col>
