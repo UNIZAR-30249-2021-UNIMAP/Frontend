@@ -4,7 +4,7 @@ import swal from 'sweetalert';
 export const Login = (correo, pass) => {
   return axios.request({
     url: 'http://localhost:7000/login?email=' + correo + '&contrasena=' + pass,
-    method: 'get',
+    method: 'post',
     data: {
       'email': correo,
       'contrasena': pass,
@@ -18,7 +18,7 @@ export const Login = (correo, pass) => {
         icon: "error"
       });
     } else {
-      console.log("El endpoint nos devuelve: " + res.data)
+      console.log("El endpoint nos devuelve: " + JSON.stringify(res.data))
     }
   })
 }
@@ -80,7 +80,7 @@ export const Report = (email, description, idEspacio) => {
 
 export const Accept = (idIncidencia, idEmpleado, prioridad) => {
   return axios.request({
-    url: 'http://localhost:7000//incidencia/administrador?idIncidencia=' + idIncidencia + '&idEmpleado=' + idEmpleado + '&prioridad=' + prioridad + '&aceptar=' + "aceptar" + '&motivo=' + null,
+    url: 'http://localhost:7000/incidencia/administrador?idIncidencia=' + idIncidencia + '&idEmpleado=' + idEmpleado + '&prioridad=' + prioridad + '&aceptar=' + "aceptar" + '&motivo=' + null,
     method: 'post',
   }).then(res => {
     if (!res.data) {
@@ -98,7 +98,7 @@ export const Accept = (idIncidencia, idEmpleado, prioridad) => {
 
 export const Deny = (idIncidencia, motivo) => {
   return axios.request({
-    url: 'http://localhost:7000//incidencia/administrador?idIncidencia=' + idIncidencia + '&idEmpleado=' + null + '&prioridad=' + null + '&aceptar=' + "denegar" + '&motivo=' + motivo,
+    url: 'http://localhost:7000/incidencia/administrador?idIncidencia=' + idIncidencia + '&idEmpleado=' + null + '&prioridad=' + null + '&aceptar=' + "denegar" + '&motivo=' + motivo,
     method: 'post',
   }).then(res => {
     if (!res.data) {
@@ -117,7 +117,7 @@ export const Deny = (idIncidencia, motivo) => {
 //TODO Discutir param
 export const GetIncidenciasMant = () => {
   return axios.request({
-    url: 'http://localhost:7000//incidencia/mantenimiento',
+    url: 'http://localhost:7000/incidencia/mantenimiento',
     method: 'get',
   }).then(res => {
     if (!res.data) {
@@ -135,7 +135,7 @@ export const GetIncidenciasMant = () => {
 
 export const FinIncidenciaMant = (idIncidencia) => {
   return axios.request({
-    url: 'http://localhost:7000//incidencia/mantenimiento',
+    url: 'http://localhost:7000/incidencia/mantenimiento',
     method: 'post',
   }).then(res => {
     if (!res.data) {
@@ -153,7 +153,7 @@ export const FinIncidenciaMant = (idIncidencia) => {
 
 export const GetMant = () => {
   return axios.request({
-    url: 'http://localhost:7000//mantenimiento',
+    url: 'http://localhost:7000/mantenimiento',
     method: 'get',
   }).then(res => {
     if (!res.data) {
@@ -171,7 +171,7 @@ export const GetMant = () => {
 
 export const GetEspacio = (idEspacio) => {
   return axios.request({
-    url: 'http://localhost:7000//espacio?idSala='+idEspacio,
+    url: 'http://localhost:7000/espacio?idSala='+idEspacio,
     method: 'get',
   }).then(res => {
     if (!res.data) {
