@@ -186,3 +186,11 @@ export const GetEspacio = (idEspacio) => {
     }
   })
 }
+
+export const GetTest = () => {
+  var response = axios.request({
+    url: 'https://servicios.ine.es/wstempus/js/ES/OPERACIONES_DISPONIBLES',
+    method: 'get',
+  })
+  return response
+}
