@@ -114,6 +114,24 @@ export const Deny = (idIncidencia, motivo) => {
   })
 }
 
+export const getIncidencias = () => {
+  return axios.request({
+    url: 'http://localhost:7000/incidencia',
+    method: 'get',
+  }).then(res => {
+    if (!res.data) {
+      console.log("Error")
+      swal({
+        title: "Error",
+        text: "No se a podidio realizar la operacion",
+        icon: "error"
+      });
+    } else {
+      console.log("Lista incidencias: " + res.data)
+    }
+  })
+}
+
 //TODO Discutir param
 export const GetIncidenciasMant = () => {
   return axios.request({

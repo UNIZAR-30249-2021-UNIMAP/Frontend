@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Col, Row } from "react-bootstrap";
 import { List, ListItem, ListItemText } from '@material-ui/core';
 
@@ -7,7 +7,7 @@ import '../Styles/Select.css';
 
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
-import { Accept, Deny } from "../../Utils/Endpointscalls";
+import { Accept, Deny, getIncidencias } from "../../Utils/Endpointscalls";
 
 const divStyle = {
     display: 'flex',
@@ -15,20 +15,31 @@ const divStyle = {
 };
 const AssignTask = () => {
     const [startDate, setStartDate] = useState(new Date());
-    //const [List, setLista] = useState([])
+    const [list, setLista] = useState([]);
     const [idJanitor, setidJanitor] = useState("");
     const [idReport, setidReport] = useState("");
     const [prio, setprio] = useState("");
     const [motivo, setmotivo] = useState("");
+    
+  
+    setLista(getIncidencias())
+    console.log(JSON.stringify(list),"ARRAY");
 
-    /*const listStructure = (nodes) => {
-        return nodes.map(node => (
-            <ListItem
-                primaryText={node.toString}
-            />
-        ));
-    };*/
-
+    var listButtom= list.map((Member) => {
+        var keys = Object.keys(Member)
+        var index = keys.indexOf("id");
+        if (index > -1) {
+           // removes the "id" element from the keys.
+           keys.splice(index, 1);
+        }
+        var divs = keys.map(k => <td>{list[k]}</td>)
+        return (
+         <tr key={list.id}>
+         divs
+         </tr>
+        )
+       });
+     
     const handleButtonAccept = async e => {
         e.preventDefault();
         Accept(idReport, idJanitor, prio);
@@ -107,11 +118,11 @@ const AssignTask = () => {
                                 <ListItemText primary="Rercoger basura" />
                             </ListItem>
                         </List>
-                        {/*
+                        {
                             <List>
-                                {listStructure([1, 2, 3, 4, 5])}
+                                {listButtom}
                             </List>
-                            */}
+                        }
                     </Row>
                     <Row>
                         <h3>Prioridad</h3>
