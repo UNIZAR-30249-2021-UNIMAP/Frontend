@@ -32,7 +32,7 @@ export default class App extends Component {
             <Route exact path="/signin" component={SignIn} />
             <Route exact path="/report" component={Report} />
             <Route exact path="/reserve" component={Reserve} />
-            <Route exact path="/assingtask" component={AssignTask} />
+            <Route exact path="/assigntask" component={AssignTask} />
             <Route exact path="/Janitor" component={Janitor} />
             <Route exact path="/assigncapacity" component={AssignCapacity} />
             <Route exact path="/assistance" component={AssistanceCheck} />

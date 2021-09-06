@@ -40,6 +40,8 @@ export const Register = (correo, pass, usuario) => {
     }
   })
 }
+
+//TODO: pasar cadena vacia  en aquellos campos que no se modifiquen
 export const getNameClass = (planta, res) => {
   axios.request({
     url: 'http://35.195.165.185:8080/geoserver/proyecto/ows?service' +
@@ -203,4 +205,12 @@ export const GetEspacio = (idEspacio) => {
       console.log("Info espacio devueltas: " + res.data)
     }
   })
+}
+
+export const GetTest = () => {
+  var response = axios.request({
+    url: 'https://servicios.ine.es/wstempus/js/ES/OPERACIONES_DISPONIBLES',
+    method: 'get',
+  })
+  return response
 }
