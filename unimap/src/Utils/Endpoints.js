@@ -23,9 +23,9 @@ export const Login = (correo, pass) => {
   })
 }
 
-export const Register = (correo, pass, usuario) => {
+export const Registrarse = (correo, contrasena, usuario) => {
   return axios.request({
-    url: 'http://localhost:7000/registro?email=' + correo + '&contrasena=' + pass + '&nombreUsuario=' + usuario,
+    url: 'http://localhost:7000/registro?email=' + correo + '&contrasena=' + contrasena + '&nombreUsuario=' + usuario,
     method: 'post',
   }).then(res => {
     if (!res.data) {
@@ -42,7 +42,7 @@ export const Register = (correo, pass, usuario) => {
 }
 
 //TODO: pasar cadena vacia  en aquellos campos que no se modifiquen
-export const getNameClass = (planta, res) => {
+export const ObtenerNombreSala = (planta, res) => {
   axios.request({
     url: 'http://35.195.165.185:8080/geoserver/proyecto/ows?service' +
       '=WFS&version=1.0.0&request=GetFeature&typeName=' + planta + '&outputFormat=application%2Fjson&BBOX='
@@ -62,7 +62,7 @@ export const getNameClass = (planta, res) => {
 }
 
 //TODO: imagen
-export const Report = (email, description, idEspacio) => {
+export const ReportarIncidencia = (email, description, idEspacio) => {
   return axios.request({
     url: 'http://localhost:7000/incidencia/reporte?email=' + email + '&descripcion=' + description + '&idEspacio=' + idEspacio + '&imagen=THIS IS A TEST',
     method: 'post',
@@ -80,7 +80,7 @@ export const Report = (email, description, idEspacio) => {
   })
 }
 
-export const Accept = (idIncidencia, idEmpleado, prioridad) => {
+export const AceptarIncidencia = (idIncidencia, idEmpleado, prioridad) => {
   return axios.request({
     url: 'http://localhost:7000/incidencia/administrador?idIncidencia=' + idIncidencia + '&idEmpleado=' + idEmpleado + '&prioridad=' + prioridad + '&aceptar=' + "aceptar" + '&motivo=' + null,
     method: 'post',
@@ -98,7 +98,7 @@ export const Accept = (idIncidencia, idEmpleado, prioridad) => {
   })
 }
 
-export const Deny = (idIncidencia, motivo) => {
+export const RechazarIncidencia = (idIncidencia, motivo) => {
   return axios.request({
     url: 'http://localhost:7000/incidencia/administrador?idIncidencia=' + idIncidencia + '&idEmpleado=' + null + '&prioridad=' + null + '&aceptar=' + "denegar" + '&motivo=' + motivo,
     method: 'post',
@@ -116,7 +116,7 @@ export const Deny = (idIncidencia, motivo) => {
   })
 }
 
-export const getIncidencias = () => {
+export const ObtenerIncidencias = () => {
   return axios.request({
     url: 'http://localhost:7000/incidencia',
     method: 'get',
@@ -135,7 +135,7 @@ export const getIncidencias = () => {
 }
 
 //TODO Discutir param
-export const GetIncidenciasMant = () => {
+export const ObtenerIncidenciasEmpleadoMant = () => {
   return axios.request({
     url: 'http://localhost:7000/incidencia/mantenimiento',
     method: 'get',
@@ -171,7 +171,7 @@ export const FinIncidenciaMant = (idIncidencia) => {
   })
 }
 
-export const GetMant = () => {
+export const ObtenerCargaTrabajoEmpleadosMant = () => {
   return axios.request({
     url: 'http://localhost:7000/mantenimiento',
     method: 'get',
@@ -189,7 +189,7 @@ export const GetMant = () => {
   })
 }
 
-export const GetEspacio = (idEspacio) => {
+export const ObtenerEspacio = (idEspacio) => {
   return axios.request({
     url: 'http://localhost:7000/espacio?idSala='+idEspacio,
     method: 'get',

@@ -17,9 +17,9 @@ const divStyle = {
     display: 'flex',
     alignItems: 'center'
 };
-const Reserve = () => {
-    const [startDate, setStartDate] = useState(null);
-    const [endDate, setEndDate] = useState(null);
+const Reserva = () => {
+    const [fechaInicio, setFechaInicio] = useState(null);
+    const [fechaFin, setFechaFin] = useState(null);
     return (
 
         <Col>
@@ -69,8 +69,8 @@ const Reserve = () => {
                             <h2>Fecha inicio</h2>
                         </text>
                         <DatePicker
-                            selected={startDate}
-                            onChange={(date) => setStartDate(date)}
+                            selected={fechaInicio}
+                            onChange={(date) => setFechaInicio(date)}
                             showTimeSelect
                             dateFormat="Pp" />
                     </Col>
@@ -79,8 +79,8 @@ const Reserve = () => {
                             <h2>Fecha fin</h2>
                         </text>
                         <DatePicker
-                            selected={endDate}
-                            onChange={(date) => setEndDate(date)}
+                            selected={fechaFin}
+                            onChange={(date) => setFechaFin(date)}
                             showTimeSelect
                             dateFormat="Pp"/>
                     </Col>
@@ -125,7 +125,7 @@ const Reserve = () => {
                             </Col>
 
                             <buttonReserve>
-                                <input type="submit" onSubmit={console.log(startDate)} value="       Reservar espacio       " size="20" />
+                                <input type="submit" onSubmit={console.log(fechaInicio)} value="       Reservar espacio       " size="20" />
                             </buttonReserve>
                         </div>
                     </Col>
@@ -136,4 +136,4 @@ const Reserve = () => {
     );
 }
 
-export default Reserve;
+export default Reserva;

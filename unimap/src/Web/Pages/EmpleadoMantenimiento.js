@@ -9,29 +9,21 @@ import Map from "../../Utils/map"
 
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
-import { Accept, Deny } from "../../Utils/Endpointscalls";
 
 const divStyle = {
     display: 'flex',
     alignItems: 'center'
 };
-const Janitor = () => {
-    const [startDate, setStartDate] = useState(new Date());
+const EmpleadoMantenimiento = () => {
     //const [List, setLista] = useState([])
-    const [idJanitor, setidJanitor] = useState("");
-    const [idReport, setidReport] = useState("");
-    const [prio, setprio] = useState("");
-    const [motivo, setmotivo] = useState("");
+    const [fechaInicio, setFechaInicio] = useState(new Date());
+    const [lista, setLista] = useState([1, 2])
+    const [idEmpleado, setIdEmpleado] = useState("");
+    const [idReporte, setIdReporte] = useState("");
+    const [prio, setPrio] = useState("");
+    const [motivo, setMotivo] = useState("");
 
-    /*const listStructure = (nodes) => {
-        return nodes.map(node => (
-            <ListItem
-                primaryText={node.toString}
-            />
-        ));
-    };*/
-
-    const handleButton = async e => {
+    const botonFinalizar = async e => {
         e.preventDefault();
         //EndTask(idReport);
     }
@@ -54,7 +46,7 @@ const Janitor = () => {
                             </dropdown>
                         </Col>
                         <Col>
-                            <input type="submit" value="       Finalizar       " size="20" onClick={handleButton} />
+                            <input type="submit" value="       Finalizar       " size="20" onClick={botonFinalizar} />
                         </Col>
                     </div>
                 </Row>
@@ -87,4 +79,4 @@ const Janitor = () => {
     );
 }
 
-export default Janitor;
+export default EmpleadoMantenimiento;

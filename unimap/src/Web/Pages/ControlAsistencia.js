@@ -6,12 +6,12 @@ import '../Styles/Report.css';
 import '../Styles/Select.css';
 
 import "react-datepicker/dist/react-datepicker.css";
-import { Accept, Deny } from "../../Utils/Endpointscalls";
+import { AceptarIncidencia, RechazarIncidencia } from "../../Utils/Endpoints";
 import { Button } from 'antd';
 
-const AssistanceCheck = () => {
+const ControlAsistencia = () => {
 
-    const handleButton = async e => {
+    const botonConfirmar = async e => {
         e.preventDefault();
         swal({
             title: "Asistencia confirmada",
@@ -32,7 +32,7 @@ const AssistanceCheck = () => {
                 <textarea color="black" type="text" name="name" id="name" cols="20" rows="1" />
                 </div>
             </Row>
-            <Button onClick={handleButton}>Confirmar</Button>
+            <Button onClick={botonConfirmar}>Confirmar</Button>
         </div>
         </form>
     );
@@ -40,4 +40,4 @@ const AssistanceCheck = () => {
 
 
 
-export default AssistanceCheck;
+export default ControlAsistencia;

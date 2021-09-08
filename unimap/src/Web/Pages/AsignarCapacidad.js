@@ -6,14 +6,13 @@ import '../Styles/Report.css';
 import '../Styles/Select.css';
 
 import "react-datepicker/dist/react-datepicker.css";
-import { Accept, Deny } from "../../Utils/Endpointscalls";
 import { Button } from 'antd';
 
 const divStyle = {
     display: 'flex',
     alignItems: 'center'
 };
-const AssignCapacity = () => {
+const AsignarCapacidad = () => {
     const [lista, setLista] = useState([{
         "commentID":25,
         "matchID":43234,
@@ -33,7 +32,7 @@ const AssignCapacity = () => {
         "description":"fgfafafaaffaafasfasf"
     }])
 
-    const handleButtonSpace = async e => {
+    const seleccionEspacio = async e => {
         e.preventDefault();
         swal({
             title: "Selecciona aforo máximo",
@@ -44,7 +43,7 @@ const AssignCapacity = () => {
           });;
     }
 
-    const handleButtonApply = async e => {
+    const aplicar = async e => {
         e.preventDefault();
         swal({
             title: "Cambios aplicados",
@@ -57,7 +56,7 @@ const AssignCapacity = () => {
         <form>
         <div className="form-inner">
             <Col>
-                {lista.map(s => <ul><Button onClick={handleButtonSpace} type="default" size="large" key={s.commentatorID} value={s.commentatorID}>{s.commentatorID}</Button></ul>)}
+                {lista.map(s => <ul><Button onClick={seleccionEspacio} type="default" size="large" key={s.commentatorID} value={s.commentatorID}>{s.commentatorID}</Button></ul>)}
                
                 <text color="white">
                     <h2>Aplicar regla a todos los espacios</h2>
@@ -66,7 +65,7 @@ const AssignCapacity = () => {
                 
                 <Row>
                     <textarea color="black" type="text" name="name" id="name" cols="50" rows="2" />
-                    <Button onClick={handleButtonApply}>Aplicar cambios</Button>
+                    <Button onClick={aplicar}>Aplicar cambios</Button>
                 </Row>
             </Col>
         </div>
@@ -76,4 +75,4 @@ const AssignCapacity = () => {
 
 
 
-export default AssignCapacity;
+export default AsignarCapacidad;

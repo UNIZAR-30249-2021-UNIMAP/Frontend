@@ -8,34 +8,34 @@ import '../Styles/Select.css';
 
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
-import { Accept, Deny, GetTest } from "../../Utils/Endpointscalls";
+import { AceptarIncidencia, RechazarIncidencia, GetTest, ObtenerIncidencias } from "../../Utils/Endpoints";
 
 const divStyle = {
     display: 'flex',
     alignItems: 'center'
 };
-const AssignTask = () => {
-    const [startDate, setStartDate] = useState(new Date());
-    const [list, setLista] = useState([1, 2])
-    const [idJanitor, setidJanitor] = useState("");
-    const [idReport, setidReport] = useState("");
-    const [prio, setprio] = useState("");
-    const [motivo, setmotivo] = useState("");
+const AsignarTareas = () => {
+    const [fechaInicio, setFechaInicio] = useState(new Date());
+    const [lista, setLista] = useState([1, 2])
+    const [idEmpleado, setIdEmpleado] = useState("");
+    const [idReporte, setIdReporte] = useState("");
+    const [prio, setPrio] = useState("");
+    const [motivo, setMotivo] = useState("");
     
   
-    setLista(getIncidencias())
-    console.log(JSON.stringify(list),"ARRAY");
+    setLista(ObtenerIncidencias())
+    console.log(JSON.stringify(lista),"ARRAY");
 
-    var listButtom= list.map((Member) => {
+    var listaBotones= lista.map((Member) => {
         var keys = Object.keys(Member)
         var index = keys.indexOf("id");
         if (index > -1) {
            // removes the "id" element from the keys.
            keys.splice(index, 1);
         }
-        var divs = keys.map(k => <td>{list[k]}</td>)
+        var divs = keys.map(k => <td>{lista[k]}</td>)
         return (
-         <tr key={list.id}>
+         <tr key={lista.id}>
          divs
          </tr>
         )
@@ -43,12 +43,12 @@ const AssignTask = () => {
      
     const handleButtonAccept = async e => {
         e.preventDefault();
-        Accept(idReport, idJanitor, prio);
+        AceptarIncidencia(idReporte, idEmpleado, prio);
     }
 
     const handleButtonDeny = async e => {
         e.preventDefault();
-        Deny(idReport, motivo);
+        RechazarIncidencia(idReporte, motivo);
     }
 
     async function cogerDatos() {
@@ -63,7 +63,7 @@ const AssignTask = () => {
                 });
               } else {
                 console.log("Info espacio devueltas: " + JSON.stringify(res.data))
-                console.log("La lista es "+list)
+                console.log("La lista es "+lista)
                 var array = []
                 res.data.forEach(function(item){
                     array.push(JSON.parse(JSON.stringify(item)))
@@ -100,8 +100,8 @@ const AssignTask = () => {
                                 <h2>Fecha del reporte</h2>
                             </text>
                             <DatePicker
-                                selected={startDate}
-                                onChange={(date) => setStartDate(date)}
+                                selected={fechaInicio}
+                                onChange={(date) => setFechaInicio(date)}
                                 dateFormat="dd/MM/yyyy" />
                         </Col>
                         <Col>
@@ -118,7 +118,7 @@ const AssignTask = () => {
                         <Col>
                         <h3>Prioridad</h3>
                         <dropdown>
-                            <div class="sidebar-box"><select id="idReport">
+                            <div class="sidebar-box"><select id="idReporte">
                                 <option value="">NORMAL</option>
                                 <option value="">URGENTE</option>
                             </select></div>
@@ -140,7 +140,7 @@ const AssignTask = () => {
                         </Row>
                         <Row>
                             <List>
-                            {list.map((element) =>
+                            {lista.map((element) =>
                                 <ListItem button>
                                 <ListItemText primary={element.Nombre} />
                                 </ListItem>
@@ -156,7 +156,7 @@ const AssignTask = () => {
                 <div style={divStyle}>
                     <Row>
                         <List>
-                        {list.map((element) =>
+                        {lista.map((element) =>
                             <ListItem button>
                             <ListItemText primary={element.Nombre} />
                             </ListItem>
@@ -164,14 +164,14 @@ const AssignTask = () => {
                         </List>
                         {
                             <List>
-                                {listButtom}
+                                {listaBotones}
                             </List>
                         }
                     </Row>
                     <Row>
                         <h3>Prioridad</h3>
                         <dropdown>
-                            <div class="sidebar-box"><select id="idReport">
+                            <div class="sidebar-box"><select id="idReporte">
                                 <option value="">NORMAL</option>
                                 <option value="">URGENTE</option>
                             </select></div>
@@ -192,4 +192,4 @@ const AssignTask = () => {
     );
 }
 
-export default AssignTask;
+export default AsignarTareas;

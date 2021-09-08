@@ -6,17 +6,17 @@ export const MenuItem = [
     },
     {
         title: "Reportes de Incidencias",
-        url: '/report',
+        url: '/Reporte',
         cName: 'nav-links'
     },
     {
         title: "Reserva de Espacios",
-        url: '/reserve',
+        url: '/Reserva',
         cName: 'nav-links'
     },
     {
         title: "Inicia sesion",
-        url: '/signin',
+        url: '/InicioSesion',
         cName: 'nav-links-mobile'
     },
 ]

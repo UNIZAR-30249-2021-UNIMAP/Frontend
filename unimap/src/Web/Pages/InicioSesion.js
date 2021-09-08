@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import '../Styles/SignUp.css';
-import { Login } from "../../Utils/Endpointscalls";
+import { Login } from "../../Utils/Endpoints";
 
-export default function SignIn() {
+export default function InicioSesion() {
   var [correo, setEmail] = useState("");
   var [pass, setPass] = useState("");
 
-  const handleButton = async e => {
+  const botonLogin = async e => {
     e.preventDefault();
     Login(correo, pass)
     
@@ -25,9 +25,9 @@ export default function SignIn() {
           <label htmlFor="password">Contraseña: </label>
           <input type="password" value={pass} onChange={e => setPass(e.target.value)} />
         </div>
-        <button onClick={handleButton} style={{ backgroundColor: "#FE4880" }}> Login </button>
+        <button onClick={botonLogin} style={{ backgroundColor: "#FE4880" }}> Login </button>
         <div className="form-group">
-          <a className="meh" href="/signup">
+          <a className="meh" href="/Registro">
             <br />
             <label >¿No tienes cuenta? Regístrate </label>
           </a>

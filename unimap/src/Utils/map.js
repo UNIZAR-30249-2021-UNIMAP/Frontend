@@ -6,7 +6,7 @@ import { Marker, Popup } from 'react-leaflet'
 import { MarkerIcon } from './react-leaflet-icon.js'
 import { WMSTileLayer, LayersControl } from 'react-leaflet';
 import proj4 from "proj4"
-import { getNameClass } from "./Endpointscalls.js";
+import { ObtenerNombreSala } from "./Endpoints.js";
 
 const geoserverUrl = "http://35.195.165.185:8080/geoserver/wms?service=WMS"
 const epsg = "+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"
@@ -61,7 +61,7 @@ const Map = (size) => {
                         planta = PLANTA_CALLE
                         break;
                 }
-                getNameClass(planta, res);
+                ObtenerNombreSala(planta, res);
             },
         })
 

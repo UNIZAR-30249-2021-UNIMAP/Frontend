@@ -7,31 +7,32 @@ import Map from "../../Utils/map"
 
 import photo from './../../Assets/photo.png';
 import { TextField } from "@material-ui/core";
+import { ReportarIncidencia } from "../../Utils/Endpoints";
 
 const divStyle = {
   display: 'flex',
   alignItems: 'center'
 };
-const Report = () => {
-  const [description, setDescription] = useState("");
+const Reporte = () => {
+  const [descripcion, setDescripcion] = useState("");
   const [email, setEmail] = useState("");
   const [base64TextString, setBase64] = useState("");
 
-  const handleButton = async e => {
+  const botonEnviar = async e => {
     e.preventDefault();
-    console.log("El email es" + email + " y la descripción es " + description)
+    console.log("El email es" + email + " y la descripción es " + descripcion)
     //TODO: MIRAR SUBIR IMAGENES
-    Report(email, description, Map.idEspacio);
+    ReportarIncidencia(email, descripcion, Map.idEspacio);
   }
   async function onChange(e) {
-    let file = e.target.files[0];
-    if (file) {
-      console.log(await toBase64(file));
+    let archivo = e.target.files[0];
+    if (archivo) {
+      console.log(await toBase64(archivo));
     }
   }
-  const toBase64 = file => new Promise((resolve, reject) => {
+  const toBase64 = archivo => new Promise((resolve, reject) => {
     const reader = new FileReader();
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(archivo);
     reader.onload = () => resolve(reader.result);
     reader.onerror = error => reject(error);
   });
@@ -44,7 +45,7 @@ const Report = () => {
         </h2>
         </anothertext>
         <description>
-          <textarea type="text" name="name" id="name" cols="70" rows="10" size="50" value={description} onChange={e => setDescription(e.target.value)} />
+          <textarea type="text" name="name" id="name" cols="70" rows="10" size="50" value={descripcion} onChange={e => setDescripcion(e.target.value)} />
         </description>
         <anothertext><h2>Email
         </h2>
@@ -61,7 +62,7 @@ const Report = () => {
         <input type="submit" />
         <div style={divStyle}>
           <buttonReport>
-            <input type="submit" value="       Enviar       " size="20" onClick={handleButton} />
+            <input type="submit" value="       Enviar       " size="20" onClick={botonEnviar} />
           </buttonReport>
         </div>
       </Col>
@@ -72,4 +73,4 @@ const Report = () => {
 
 }
 
-export default Report;
+export default Reporte;

@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { Register } from "../../Utils/Endpointscalls";
+import { Registrarse } from "../../Utils/Endpoints";
 import '../Styles/SignUp.css';
 
 
 
 
 
-export default function SignUp() {
+export default function Registro() {
 
   var [correo, setEmail] = useState("");
   var [pass, setPass] = useState("");
@@ -14,7 +14,7 @@ export default function SignUp() {
 
   const handleButton = async e => {
     e.preventDefault();
-    Register(correo, pass, usuario);
+    Registrarse(correo, pass, usuario);
   }
   return (
     <form>
@@ -35,7 +35,7 @@ export default function SignUp() {
         </div>
         <button onClick={handleButton} style={{ backgroundColor: "#FE4880" }}> Registrarse </button>
         <div className="form-group">
-          <a className="meh" href="/signin">
+          <a className="meh" href="/InicioSesion">
             <br />
             <label >¿Ya tienes cuenta? Inicia sesión </label>
           </a>

@@ -1,10 +1,10 @@
 import Map from "../../Utils/map"
 
-const MainPage_hu6 = (state) => {
+const Inicio = (state) => {
 
   return (
     Map("map")
   );
 }
 
-export default MainPage_hu6;
+export default Inicio;

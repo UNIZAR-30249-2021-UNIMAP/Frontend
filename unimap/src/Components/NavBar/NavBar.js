@@ -31,7 +31,7 @@ class NavBar extends Component {
                     })}
                     
                 </ul>
-                <a className="meh" href="/signin">
+                <a className="meh" href="/InicioSesion">
                 <Button>Sign In</Button>
                 </a>
                 

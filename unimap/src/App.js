@@ -7,16 +7,16 @@ import { Switch } from "react-router-dom"
 import { Redirect } from "react-router-dom"
 
 //Pages
-import MainPage_hu6 from "./Web/Pages/MainPage";
+import Inicio from "./Web/Pages/Inicio";
 import NotFoundPage from "./Web/Pages/404";
-import SignUp from "./Web/Pages/SignUp"
-import SignIn from "./Web/Pages/SignIn"
-import Report from "./Web/Pages/Report"
-import Reserve from "./Web/Pages/Reserve"
-import AssignTask from "./Web/Pages/AssignTask"
-import Janitor from "./Web/Pages/Janitor"
-import AssignCapacity from "./Web/Pages/AssignCapacity";
-import AssistanceCheck from "./Web/Pages/AssistanceCheck";
+import Registro from "./Web/Pages/Registro"
+import InicioSesion from "./Web/Pages/InicioSesion"
+import Reporte from "./Web/Pages/Reporte"
+import Reserva from "./Web/Pages/Reserva"
+import AsignarTareas from "./Web/Pages/AsignarTareas"
+import EmpleadoMantenimiento from "./Web/Pages/EmpleadoMantenimiento"
+import AsignarCapacidad from "./Web/Pages/AsignarCapacidad";
+import ControlAsistencia from "./Web/Pages/ControlAsistencia";
 
 export default class App extends Component {
 
@@ -26,16 +26,16 @@ export default class App extends Component {
         <NavBar />
         <BrowserRouter >
           <Switch>
-            <Route exact path="/" component={MainPage_hu6} />
+            <Route exact path="/" component={Inicio} />
             <Route exact path="/404" component={NotFoundPage} />
-            <Route exact path="/signup" component={SignUp} />
-            <Route exact path="/signin" component={SignIn} />
-            <Route exact path="/report" component={Report} />
-            <Route exact path="/reserve" component={Reserve} />
-            <Route exact path="/assigntask" component={AssignTask} />
-            <Route exact path="/Janitor" component={Janitor} />
-            <Route exact path="/assigncapacity" component={AssignCapacity} />
-            <Route exact path="/assistance" component={AssistanceCheck} />
+            <Route exact path="/Registro" component={Registro} />
+            <Route exact path="/InicioSesion" component={InicioSesion} />
+            <Route exact path="/Reporte" component={Reporte} />
+            <Route exact path="/Reserva" component={Reserva} />
+            <Route exact path="/AsignarTareas" component={AsignarTareas} />
+            <Route exact path="/EmpleadoMantenimiento" component={EmpleadoMantenimiento} />
+            <Route exact path="/AsignarCapacidad" component={AsignarCapacidad} />
+            <Route exact path="/ControlAsistencia" component={ControlAsistencia} />
             <Redirect to={"/404"} />
           </Switch>
         </BrowserRouter>
