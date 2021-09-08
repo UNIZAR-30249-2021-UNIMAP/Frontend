@@ -7,6 +7,7 @@ import { MarkerIcon } from './react-leaflet-icon.js'
 import { WMSTileLayer, LayersControl } from 'react-leaflet';
 import proj4 from "proj4"
 import { ObtenerNombreSala } from "./Endpoints.js";
+import TextArea from "antd/lib/input/TextArea";
 
 const geoserverUrl = "http://35.195.165.185:8080/geoserver/wms?service=WMS"
 const epsg = "+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"
@@ -74,7 +75,7 @@ const Map = (size) => {
         return (
             <>
                 <Marker position={markers} icon={MarkerIcon}>
-                    <Popup> <var>{idEspacio}</var></Popup>
+                    <Popup> <textarea readonly="yes">{idEspacio}</textarea></Popup>
                 </Marker>
             </>
         )
