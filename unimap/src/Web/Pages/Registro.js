@@ -33,7 +33,7 @@ export default function Registro() {
           <label htmlFor="password">Contraseña: </label>
           <input type="password" name="pwassword" value={pass} onChange={e => setPass(e.target.value)} />
         </div>
-        <button onClick={handleButton} style={{ backgroundColor: "#FE4880" }}> Registrarse </button>
+        <button onClick={handleButton} style={{ backgroundColor: "#7200a7", color: 'whitesmoke', borderRadius: '4px' }}> Registrarse </button>
         <div className="form-group">
           <a className="meh" href="/InicioSesion">
             <br />

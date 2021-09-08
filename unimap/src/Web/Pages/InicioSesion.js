@@ -25,7 +25,7 @@ export default function InicioSesion() {
           <label htmlFor="password">Contraseña: </label>
           <input type="password" value={pass} onChange={e => setPass(e.target.value)} />
         </div>
-        <button onClick={botonLogin} style={{ backgroundColor: "#FE4880" }}> Login </button>
+        <button onClick={botonLogin} style={{ backgroundColor: "#7200a7", color: 'whitesmoke', borderRadius: '4px' }}> Login </button>
         <div className="form-group">
           <a className="meh" href="/Registro">
             <br />
