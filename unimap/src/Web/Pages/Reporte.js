@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Col } from "react-bootstrap";
 
-import '../Styles/Report.css';
+import '../Styles/Reporte.css';
 
 import Map from "../../Utils/map"
 

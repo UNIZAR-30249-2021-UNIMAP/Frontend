@@ -1,13 +1,13 @@
 import axios from 'axios'
 import swal from 'sweetalert';
 
-export const Login = (correo, pass) => {
+export const Login = (correo, contrasena) => {
   return axios.request({
-    url: 'http://localhost:7000/login?email=' + correo + '&contrasena=' + pass,
+    url: 'http://localhost:7000/login?email=' + correo + '&contrasena=' + contrasena,
     method: 'post',
     data: {
       'email': correo,
-      'contrasena': pass,
+      'contrasena': contrasena,
     },
   }).then(res => {
     if (!res.data) {
@@ -62,9 +62,9 @@ export const ObtenerNombreSala = (planta, res) => {
 }
 
 //TODO: imagen
-export const ReportarIncidencia = (email, description, idEspacio) => {
+export const ReportarIncidencia = (email, descripcion, idEspacio) => {
   return axios.request({
-    url: 'http://localhost:7000/incidencia/reporte?email=' + email + '&descripcion=' + description + '&idEspacio=' + idEspacio + '&imagen=THIS IS A TEST',
+    url: 'http://localhost:7000/incidencia/reporte?email=' + email + '&descripcion=' + descripcion + '&idEspacio=' + idEspacio + '&imagen=THIS IS A TEST',
     method: 'post',
   }).then(res => {
     if (!res.data) {

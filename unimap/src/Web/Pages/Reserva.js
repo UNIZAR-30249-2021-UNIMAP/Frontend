@@ -4,8 +4,8 @@ import { Checkbox } from '@material-ui/core';
 
 import Map from "../../Utils/map"
 
-import '../Styles/Report.css';
-import '../Styles/Select.css';
+import '../Styles/Reporte.css';
+import '../Styles/Selector.css';
 
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 

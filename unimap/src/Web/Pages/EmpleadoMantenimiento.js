@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { List, ListItem, ListItemText } from '@material-ui/core';
 
-import '../Styles/Report.css';
-import '../Styles/Select.css';
+import '../Styles/Reporte.css';
+import '../Styles/Selector.css';
 
 import Map from "../../Utils/map"
 

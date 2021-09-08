@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import '../Styles/SignUp.css';
+import '../Styles/Registro.css';
 import { Login } from "../../Utils/Endpoints";
 
 export default function InicioSesion() {

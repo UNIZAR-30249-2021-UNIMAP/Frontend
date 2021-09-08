@@ -3,8 +3,8 @@ import { Col, Row } from "react-bootstrap";
 import { List, ListItem, ListItemText } from '@material-ui/core';
 import swal from 'sweetalert';
 
-import '../Styles/Report.css';
-import '../Styles/Select.css';
+import '../Styles/Reporte.css';
+import '../Styles/Selector.css';
 
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Registrarse } from "../../Utils/Endpoints";
-import '../Styles/SignUp.css';
+import '../Styles/Registro.css';
 
 
 
