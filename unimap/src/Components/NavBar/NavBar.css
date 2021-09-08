@@ -12,6 +12,7 @@
     justify-self: start;
     margin-left: 20px;
     cursor: pointer;
+    margin-top: 15px;
 }
 
 .fa-react {
@@ -28,12 +29,14 @@
     width: 70vw;
     justify-content: end;
     margin-right: 2rem;
+    margin-top: 15px;
 }
 
 .nav-links {
     color: white;
     text-decoration: none;
     padding: 0.5rem 1rem;
+    
 }
 
 .nav-links:hover {
@@ -52,4 +55,5 @@
 
 .menu-icon{
     display: none;
+    
 }

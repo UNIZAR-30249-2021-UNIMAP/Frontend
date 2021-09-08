@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Col } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 
 import '../Styles/Reporte.css';
 
@@ -39,32 +39,35 @@ const Reporte = () => {
 
   return (
     <div style={divStyle}>
-      {Map("mapSmall")}
-      <Col>
-        <anothertext><h2>Descripción
-        </h2>
+      <div style={{paddingTop: '2em'}}>
+        {Map("mapSmall")}
+      </div>
+      <Col style={{marginLeft: '-100px'}}> 
+        <anothertext>
+          <h2 style={{color: 'white'}}>Descripción</h2>
         </anothertext>
         <description>
           <textarea type="text" name="name" id="name" cols="70" rows="10" size="50" value={descripcion} onChange={e => setDescripcion(e.target.value)} />
         </description>
-        <anothertext><h2>Email
-        </h2>
-        </anothertext>
         <anothertext>
-          <input type="text" name="name" id="name" cols="70" rows="10" size="50" value={email} onChange={e => setEmail(e.target.value)} />
+          <h2 style={{color: 'white'}}>Email</h2>
         </anothertext>
-        <input onChange={(e) => onChange(e)}
-          type="file"
-          name="image"
-          id="file"
-          accept=".jpeg, .png. ,jpg"
-        />
-        <input type="submit" />
-        <div style={divStyle}>
-          <buttonReport>
-            <input type="submit" value="       Enviar       " size="20" onClick={botonEnviar} />
-          </buttonReport>
+        <description>
+          <textarea type="text" name="name" id="name" cols="70" rows="10" size="50" value={email} onChange={e => setEmail(e.target.value)} />
+          </description>
+
+        <div style={{marginTop: '30px', marginLeft: '-70px', color: 'white'}}>
+          <input onChange={(e) => onChange(e)}
+            type="file"
+            name="image"
+            id="file"
+            accept=".jpeg, .png. ,jpg"
+          />
         </div>
+          <buttonReport>
+            <input type="submit" value="    Enviar    " size="10" onClick={botonEnviar} />
+          </buttonReport>
+          
       </Col>
 
     </div >

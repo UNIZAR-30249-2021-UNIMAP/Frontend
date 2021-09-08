@@ -12,7 +12,7 @@ import DatePicker from "react-datepicker";
 
 const divStyle = {
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'start'
 };
 const EmpleadoMantenimiento = () => {
     //const [List, setLista] = useState([])
@@ -30,7 +30,10 @@ const EmpleadoMantenimiento = () => {
 
     return (
         <div style={divStyle}>
-            <Col>
+            <Col style={{marginTop: '30px'}}>
+                {Map("mapSmall")}
+            </Col>
+            <Col style={{marginTop: '20px', marginLeft: '50px'}}>
                 <Row>
                     <div style={divStyle}>
                         <Col>
@@ -46,14 +49,14 @@ const EmpleadoMantenimiento = () => {
                             </dropdown>
                         </Col>
                         <Col>
-                            <input type="submit" value="       Finalizar       " size="20" onClick={botonFinalizar} />
+                            <input style={{marginTop: '14px'}} type="submit" value="       Finalizar       " size="20" onClick={botonFinalizar} />
                         </Col>
                     </div>
                 </Row>
                 <Row>
                     <Col>
                         <Row>
-                            <h2>INCIDENCIAS</h2>
+                            <h2 style={{color: 'white'}}>INCIDENCIAS</h2>
                         </Row>
                         <Row>
                             <List component="nav">
@@ -71,10 +74,6 @@ const EmpleadoMantenimiento = () => {
 
                 </Row >
             </Col >
-            <Col>
-                {Map("mapSmall")}
-            </Col>
-
         </div>
     );
 }

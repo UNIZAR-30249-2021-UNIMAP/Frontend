@@ -25,14 +25,8 @@ const Reserva = () => {
         <Col>
             <Row>
                 <div style={divStyle}>
-                    <Col><text>
-                        <h2>Aforo mínimo</h2>
-                    </text>
-                        <text>
-                            <textarea type="text" name="name" id="name" cols="15" rows="2" />
-                        </text>
-                    </Col>
-                    <dropdown>
+                    
+                    <dropdown style={{marginLeft: '30px'}}>
                         <div class="sidebar-box"><select id="equipo">
                             <option value="">Con proyector</option>
                             <option value="">Sin proyector</option>
@@ -41,7 +35,7 @@ const Reserva = () => {
 
                     </dropdown>
 
-                    <dropdown>
+                    <dropdown style={{marginLeft: '10px'}}>
                         <div class="sidebar-box"><select id="equipo">
                             <option value="">Ada Byron</option>
                             <option value="">Torres Quevedo</option>
@@ -49,7 +43,7 @@ const Reserva = () => {
                         </select></div>
                     </dropdown>
 
-                    <dropdown>
+                    <dropdown style={{marginLeft: '10px'}}>
                         <div class="sidebar-box"><select id="equipo">
                             <option value="">Planta 0</option>
                             <option value="">Planta 1</option>
@@ -58,15 +52,23 @@ const Reserva = () => {
                         </select></div>
                     </dropdown>
 
-                    <dropdown>
+                    <dropdown style={{marginLeft: '10px'}}>
                         <div class="sidebar-box"><select id="equipo">
                             <option value="">Aula</option>
                             <option value="">Laboratorio</option>
                         </select></div>
                     </dropdown>
-                    <Col>
+                    <Col style={{marginLeft: '70px'}}>
                         <text>
-                            <h2>Fecha inicio</h2>
+                            <h2 style={{color: 'white'}}>Aforo mínimo</h2>
+                        </text>
+                        <text>
+                            <textarea type="text" name="name" id="name" cols="15" rows="1" />
+                        </text>
+                    </Col>
+                    <Col style={{marginLeft: '10px'}}>
+                        <text>
+                            <h2 style={{color: 'white'}}>Fecha inicio</h2>
                         </text>
                         <DatePicker
                             selected={fechaInicio}
@@ -76,7 +78,7 @@ const Reserva = () => {
                     </Col>
                     <Col>
                         <text>
-                            <h2>Fecha fin</h2>
+                            <h2 style={{color: 'white'}}>Fecha fin</h2>
                         </text>
                         <DatePicker
                             selected={fechaFin}
@@ -84,10 +86,12 @@ const Reserva = () => {
                             showTimeSelect
                             dateFormat="Pp"/>
                     </Col>
+                    <div style={{color: 'white', marginLeft: '10px'}}>
                     <FormControlLabel
                         control={<Checkbox />}
                         label="Semanal"
                     />
+                    </div>
                     <input type="submit" value="       Filtrar       " size="20" />
                 </div>
             </Row>
@@ -95,32 +99,31 @@ const Reserva = () => {
                 <div style={divStyle}>
                     {Map("mapMedium")}
 
-                    <Col>
-                        <anothertext><h2>Espacio
-                        </h2>
+                    <Col style={{marginLeft: '-100px'}}>
+                        <anothertext>
+                            <h2 style={{color: 'white'}}>Espacio </h2>
                         </anothertext>
                         <anothertext>
                             <textarea type="text" name="name" id="name" cols="40" rows="2" />
                         </anothertext>
-                        <anothertext><h2>Nombre completo
-                        </h2>
+                        <anothertext>
+                            <h2 style={{color: 'white'}}>Nombre completo</h2>
                         </anothertext>
                         <anothertext>
                             <textarea type="text" name="name" id="name" cols="40" rows="2" />
                         </anothertext>
-                        <anothertext><h2>Email
-                        </h2>
+                        <anothertext>
+                            <h2 style={{color: 'white'}}>Email</h2>
                         </anothertext>
                         <anothertext>
-                            <textarea type="text" name="name" id="name" cols="40" rows="2" />
+                            <textarea type="email" name="name" id="name" cols="40" rows="2" pattern=".+@.\.com" />
                         </anothertext>
                         <div style={divStyle}>
                             <Col>
-                                <anothertext><h2>Nº Teléfono
-                                </h2>
+                                <anothertext><h2 style={{color: 'white'}}>Nº Teléfono</h2>
                                 </anothertext>
                                 <anothertext>
-                                    <textarea type="text" name="name" id="name" cols="10" rows="2" />
+                                    <input type="tel" name="name" id="name" cols="12" rows="2" />
                                 </anothertext>
                             </Col>
 

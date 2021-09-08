@@ -3,25 +3,25 @@ text {
     position: relative;
     display: flex;
     margin-left: 10px;
-    color: #fff;
+    color: black;
     height: "370";
     size: "180";
     resize: none;
 }
 
 anothertext {
-    text-align: center;
+    text-align:initial;
     position: relative;
     display: flex;
     margin-left: 150px;
-    color: #fff;
-    margin-top: 20px;
+    color: black;
+    margin-top: 8px;
     resize: none;
 }
 
 description {
-    width: 100%;
-    height: 200px;
+    width: 700px;
+    height: 100px;
     position: relative;
     display: flex;
     margin-left: 150px;
@@ -41,6 +41,7 @@ buttonReport {
     display: flex;
     width: 230px;
     height: 50px;
+    margin-top: 50px;
 }
 
 dropdown {

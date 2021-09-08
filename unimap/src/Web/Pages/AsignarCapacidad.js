@@ -56,16 +56,16 @@ const AsignarCapacidad = () => {
         <form>
         <div className="form-inner">
             <Col>
+                <h2>Asignar aforo a espacios concretos</h2>
                 {lista.map(s => <ul><Button onClick={seleccionEspacio} type="default" size="large" key={s.commentatorID} value={s.commentatorID}>{s.commentatorID}</Button></ul>)}
                
-                <text color="white">
-                    <h2>Aplicar regla a todos los espacios</h2>
-                </text>
-                <h2>Introduzca una distancia de seguridad en metros</h2>
+                <h2 style={{marginTop:'60px'}}>Aplicar regla a todos los espacios: <br/> Introduzca una distancia de seguridad en metros</h2>
                 
                 <Row>
                     <textarea color="black" type="text" name="name" id="name" cols="50" rows="2" />
-                    <Button onClick={aplicar}>Aplicar cambios</Button>
+                    <div style={{marginTop:'10px'}}>
+                        <Button onClick={aplicar}>Aplicar cambios</Button>
+                    </div>
                 </Row>
             </Col>
         </div>

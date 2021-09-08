@@ -22,11 +22,9 @@ const AsignarTareas = () => {
     const [prio, setPrio] = useState("");
     const [motivo, setMotivo] = useState("");
     
-  
-    setLista(ObtenerIncidencias())
     console.log(JSON.stringify(lista),"ARRAY");
 
-    var listaBotones= lista.map((Member) => {
+    var listaBotones = lista.map((Member) => {
         var keys = Object.keys(Member)
         var index = keys.indexOf("id");
         if (index > -1) {
