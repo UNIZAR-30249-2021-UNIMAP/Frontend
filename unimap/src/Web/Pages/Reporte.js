@@ -39,24 +39,24 @@ const Reporte = () => {
 
   return (
     <div style={divStyle}>
-      <div style={{paddingTop: '2em'}}>
+      <div style={{ paddingTop: '2em' }}>
         {Map("mapSmall")}
       </div>
-      <Col style={{marginLeft: '-100px'}}> 
+      <Col style={{ marginLeft: '-100px' }}>
         <anothertext>
-          <h2 style={{color: 'white'}}>Descripción</h2>
+          <h2 style={{ color: 'white' }}>Descripción</h2>
         </anothertext>
         <description>
           <textarea type="text" name="name" id="name" cols="70" rows="10" size="50" value={descripcion} onChange={e => setDescripcion(e.target.value)} />
         </description>
         <anothertext>
-          <h2 style={{color: 'white'}}>Email</h2>
+          <h2 style={{ color: 'white' }}>Email</h2>
         </anothertext>
         <description>
           <textarea type="text" name="name" id="name" cols="70" rows="10" size="50" value={email} onChange={e => setEmail(e.target.value)} />
-          </description>
+        </description>
 
-        <div style={{marginTop: '30px', marginLeft: '-70px', color: 'white'}}>
+        <div style={{ marginTop: '30px', marginLeft: '-70px', color: 'white' }}>
           <input onChange={(e) => onChange(e)}
             type="file"
             name="image"
@@ -64,10 +64,10 @@ const Reporte = () => {
             accept=".jpeg, .png. ,jpg"
           />
         </div>
-          <buttonReport>
-            <input type="submit" value="    Enviar    " size="10" onClick={botonEnviar} />
-          </buttonReport>
-          
+        <buttonReport>
+          <input type="submit" value="    Enviar    " size="10" onClick={botonEnviar} />
+        </buttonReport>
+
       </Col>
 
     </div >

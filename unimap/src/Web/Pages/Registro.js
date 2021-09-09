@@ -13,7 +13,7 @@ export default function Registro() {
   var [correo, setEmail] = useState("");
   var [pass, setPass] = useState("");
   var [usuario, setUsuario] = useState("");
-  const nuevaPagina= useHistory()
+  const nuevaPagina = useHistory()
 
   const handleButton = async e => {
     e.preventDefault();
