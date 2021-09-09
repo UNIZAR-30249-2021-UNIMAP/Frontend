@@ -71,7 +71,7 @@ const AsignarCapacidad = () => {
                         </div>
                     </Row>
                     <Row style={{marginTop:"100px"}}>
-                        <input type="submit" value="       Cambiar aforos       " size="20" onClick={e => nuevaPagina.push('/AsignarTareas')} />
+                        <input type="submit" value="       Asignar tareas       " size="20" onClick={e => nuevaPagina.push('/AsignarTareas')} />
                     </Row>
                 </Col>
             </div>
