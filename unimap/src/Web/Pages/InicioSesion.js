@@ -1,15 +1,37 @@
 import React, { useState } from "react";
 import '../Styles/Registro.css';
 import { Login } from "../../Utils/Endpoints";
+import swal from 'sweetalert';
+import { useHistory } from "react-router-dom";
+
 
 export default function InicioSesion() {
   var [correo, setEmail] = useState("");
   var [pass, setPass] = useState("");
+  const nuevaPagina = useHistory()
+
 
   const botonLogin = async e => {
     e.preventDefault();
-    Login(correo, pass)
-    
+    Login(correo, pass).then(res => {
+      if (!res.data) {
+        console.log("Error")
+        swal({
+          title: "Error",
+          text: "Usuario o contraseña incorrectos.",
+          icon: "error"
+        });
+      } else {
+        console.log("El endpoint nos devuelve: " + JSON.stringify(res.data))
+        if (JSON.stringify(res.data) == "1")
+          nuevaPagina.push('/');
+        else if (JSON.stringify(res.data) == "2")
+          nuevaPagina.push('/AsignarTareas');
+        else
+          nuevaPagina.push('/EmpleadoMantenimiento');
+      }
+    })
+
   }
 
   return (

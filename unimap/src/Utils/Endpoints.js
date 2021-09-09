@@ -9,17 +9,6 @@ export const Login = (correo, contrasena) => {
       'email': correo,
       'contrasena': contrasena,
     },
-  }).then(res => {
-    if (!res.data) {
-      console.log("Error")
-      swal({
-        title: "Error",
-        text: "Usuario o contraseña incorrectos.",
-        icon: "error"
-      });
-    } else {
-      console.log("El endpoint nos devuelve: " + JSON.stringify(res.data))
-    }
   })
 }
 
@@ -27,24 +16,13 @@ export const Registrarse = (correo, contrasena, usuario) => {
   return axios.request({
     url: 'http://localhost:7000/registro?email=' + correo + '&contrasena=' + contrasena + '&nombreUsuario=' + usuario,
     method: 'post',
-  }).then(res => {
-    if (!res.data) {
-      console.log("Error")
-      swal({
-        title: "Error",
-        text: "Usuario o correo ya existe.",
-        icon: "error"
-      });
-    } else {
-      console.log("El endpoint nos devuelve: " + res.data)
-    }
   })
 }
 
 //TODO: pasar cadena vacia  en aquellos campos que no se modifiquen
 export const ObtenerNombreSala = (planta, res) => {
   axios.request({
-    url: 'http://35.195.165.185:8080/geoserver/proyecto/ows?service' +
+    url: 'http://localhost:8080/geoserver/proyecto/ows?service' +
       '=WFS&version=1.0.0&request=GetFeature&typeName=' + planta + '&outputFormat=application%2Fjson&BBOX='
       + res[0] + ',' + res[1] + ',' + res[0] + ',' + res[1] + '&propertyName=id',
     method: 'get',
@@ -191,7 +169,7 @@ export const ObtenerCargaTrabajoEmpleadosMant = () => {
 
 export const ObtenerEspacio = (idEspacio) => {
   return axios.request({
-    url: 'http://localhost:7000/espacio?idSala='+idEspacio,
+    url: 'http://localhost:7000/espacio?idSala=' + idEspacio,
     method: 'get',
   }).then(res => {
     if (!res.data) {

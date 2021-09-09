@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Registrarse } from "../../Utils/Endpoints";
 import '../Styles/Registro.css';
+import swal from 'sweetalert';
+import { useHistory } from "react-router-dom";
 
 
 
@@ -11,10 +13,23 @@ export default function Registro() {
   var [correo, setEmail] = useState("");
   var [pass, setPass] = useState("");
   var [usuario, setUsuario] = useState("");
+  const nuevaPagina= useHistory()
 
   const handleButton = async e => {
     e.preventDefault();
-    Registrarse(correo, pass, usuario);
+    Registrarse(correo, pass, usuario).then(res => {
+      if (!res.data) {
+        console.log("Error")
+        swal({
+          title: "Error",
+          text: "Usuario o correo ya existe.",
+          icon: "error"
+        });
+      } else {
+        console.log("El endpoint nos devuelve: " + res.data)
+        nuevaPagina.push('/InicioSesion');
+      }
+    })
   }
   return (
     <form>

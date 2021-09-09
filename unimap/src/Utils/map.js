@@ -9,7 +9,7 @@ import proj4 from "proj4"
 import { ObtenerNombreSala } from "./Endpoints.js";
 import TextArea from "antd/lib/input/TextArea";
 
-const geoserverUrl = "http://35.195.165.185:8080/geoserver/wms?service=WMS"
+const geoserverUrl = "http://localhost:8080/geoserver/wms?service=WMS"
 const epsg = "+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"
 const PLANTA_CALLE = 'proyecto:adap00,proyecto:torresp00,proyecto:betanp00'
 const PLANTA1 = 'proyecto:adap01,proyecto:torresp01,proyecto:betanp01'
