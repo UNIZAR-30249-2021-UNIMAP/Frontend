@@ -11,7 +11,7 @@ import { useHistory } from "react-router-dom";
 
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
-import { AceptarIncidencia, RechazarIncidencia, GetTest, ObtenerIncidencias } from "../../Utils/Endpoints";
+import { AceptarIncidencia, RechazarIncidencia, ObtenerIncidencias, ObtenerCargaTrabajoEmpleadosMant } from "../../Utils/Endpoints";
 
 const divStyle = {
     display: 'flex',
@@ -25,8 +25,7 @@ var fechaComprobar;
 var img = "iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAApgAAAKYB3X3/OAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAANCSURBVEiJtZZPbBtFFMZ/M7ubXdtdb1xSFyeilBapySVU8h8OoFaooFSqiihIVIpQBKci6KEg9Q6H9kovIHoCIVQJJCKE1ENFjnAgcaSGC6rEnxBwA04Tx43t2FnvDAfjkNibxgHxnWb2e/u992bee7tCa00YFsffekFY+nUzFtjW0LrvjRXrCDIAaPLlW0nHL0SsZtVoaF98mLrx3pdhOqLtYPHChahZcYYO7KvPFxvRl5XPp1sN3adWiD1ZAqD6XYK1b/dvE5IWryTt2udLFedwc1+9kLp+vbbpoDh+6TklxBeAi9TL0taeWpdmZzQDry0AcO+jQ12RyohqqoYoo8RDwJrU+qXkjWtfi8Xxt58BdQuwQs9qC/afLwCw8tnQbqYAPsgxE1S6F3EAIXux2oQFKm0ihMsOF71dHYx+f3NND68ghCu1YIoePPQN1pGRABkJ6Bus96CutRZMydTl+TvuiRW1m3n0eDl0vRPcEysqdXn+jsQPsrHMquGeXEaY4Yk4wxWcY5V/9scqOMOVUFthatyTy8QyqwZ+kDURKoMWxNKr2EeqVKcTNOajqKoBgOE28U4tdQl5p5bwCw7BWquaZSzAPlwjlithJtp3pTImSqQRrb2Z8PHGigD4RZuNX6JYj6wj7O4TFLbCO/Mn/m8R+h6rYSUb3ekokRY6f/YukArN979jcW+V/S8g0eT/N3VN3kTqWbQ428m9/8k0P/1aIhF36PccEl6EhOcAUCrXKZXXWS3XKd2vc/TRBG9O5ELC17MmWubD2nKhUKZa26Ba2+D3P+4/MNCFwg59oWVeYhkzgN/JDR8deKBoD7Y+ljEjGZ0sosXVTvbc6RHirr2reNy1OXd6pJsQ+gqjk8VWFYmHrwBzW/n+uMPFiRwHB2I7ih8ciHFxIkd/3Omk5tCDV1t+2nNu5sxxpDFNx+huNhVT3/zMDz8usXC3ddaHBj1GHj/As08fwTS7Kt1HBTmyN29vdwAw+/wbwLVOJ3uAD1wi/dUH7Qei66PfyuRj4Ik9is+hglfbkbfR3cnZm7chlUWLdwmprtCohX4HUtlOcQjLYCu+fzGJH2QRKvP3UNz8bWk1qMxjGTOMThZ3kvgLI5AzFfo379UAAAAASUVORK5CYII="
 var motivo;
 var idEmpleado;
-var idReporte;
-var prio;
+var prioridad = "NORMAL";
 
 const scrollboxStryle = {
     overflowY: 'scroll',
@@ -112,6 +111,10 @@ const AsignarIncidencias = () => {
         filtrarlista();
     }
 
+    const cambioPrioridad = prioridadNueva => {
+        prioridad = prioridadNueva;
+    }
+
     const handlerIncidenciaClick = element => async e => {
         console.log("entro incidencia")
         setIncedenciaMostra(element.descripcion);
@@ -127,17 +130,27 @@ const AsignarIncidencias = () => {
 
     const handleButtonAccept = async e => {
         //e.preventDefault();
-        AceptarIncidencia(idReporte, idEmpleado, prio);
+        console.log("prioridad: " + prioridad)
+        AceptarIncidencia(idIncidenciaClick, idEmpleado, prioridad);
     }
 
     const handleButtonDeny = async e => {
         //e.preventDefault();
-        RechazarIncidencia(idReporte, motivo);
+        swal({
+            title: "Determina el motivo del rechazo",
+            content: "input",
+            buttons: true
+        }).then((value) => {
+            motivo = value
+            RechazarIncidencia(idIncidenciaClick, motivo);
+        });;
     }
 
     async function cogerDatos() {
         //e.preventDefault();
-        GetTest().then(res => {
+        ObtenerIncidencias().then(res => {
+            console.log("datos obtener incidencias: ")
+            console.log(res.data)
             if (!res.data) {
                 //console.log("Error")
                 swal({
@@ -147,7 +160,6 @@ const AsignarIncidencias = () => {
                 });
             } else {
                 //console.log("Informacion sin tratar" + res.data)
-                res.data = ([{ "descripcion": "primera incidencia creada", "idEspacio": "adap03.44", "reportadoTimeStamp": "2021-09-09 17:12:49.285191", "imagen": img, "id": 108578 }, { "descripcion": "primera incidencia creada", "idEspacio": "adap03.44", "reportadoTimeStamp": "2021-09-09 17:12:49.285191", "imagen": img, "id": 108578 }, { "descripcion": "primera incidencia creada", "idEspacio": "torresp03.44", "reportadoTimeStamp": "2021-09-09 17:12:49.285191", "imagen": img, "id": 108578 }, { "descripcion": "primera incidencia creada", "idEspacio": "adap03.44", "reportadoTimeStamp": "2021-09-09 17:12:49.285191", "imagen": img, "id": 108578 }])
                 //console.log("Informacion try sin tratar" + res.data)
                 //console.log("Info espacio devueltas: " + JSON.stringify(res.data))
                 var array = []
@@ -159,7 +171,7 @@ const AsignarIncidencias = () => {
             }
         }
         );
-        GetTest().then(res => {
+        ObtenerCargaTrabajoEmpleadosMant().then(res => {
             if (!res.data) {
                 console.log("Error")
                 swal({
@@ -169,11 +181,11 @@ const AsignarIncidencias = () => {
                 });
             } else {
                 //console.log("Informacion sin tratar" + res.data)
-                res.data = ([{ "IncidenciasNormales": 3, "id": 98400, "IncidenciasUrgentes": 0, "nombre": "personal98400" }, { "IncidenciasNormales": 0, "id": 98402, "IncidenciasUrgentes": 0, "nombre": "personal98402" }])
                 //console.log("Informacion try sin tratar" + res.data)
                 //console.log("Info espacio devueltas: " + JSON.stringify(res.data))
                 var array = []
                 res.data.forEach(function (item) {
+                    console.log("personal devuelto: " + JSON.stringify(item))
                     array.push(JSON.parse(JSON.stringify(item)))
                 })
                 setListaPersonal(array)
@@ -226,7 +238,7 @@ const AsignarIncidencias = () => {
                                 {listaIncidenciasMostrada.map((element) =>
                                     <ListItem button onClick={handlerIncidenciaClick(element)}>
                                         <ListItemText primary={element.descripcion} />
-                                        <img src={"data:image/jpeg;base64," + element.imagen} />
+                                        <img src={element.imagen} />
                                     </ListItem>
                                 )}
                             </List>
@@ -245,7 +257,7 @@ const AsignarIncidencias = () => {
                             <List>
                                 {listaPersonal.map((element) =>
                                     <ListItem button onClick={handlerPersonalClick(element)}>
-                                        <ListItemText primary={element.nombre} secondary={"Tareas normales: " + element.IncidenciasNormales + "   " + "Tareas urgentes: " + element.IncidenciasUrgentes} />
+                                        <ListItemText primary={element.nombre} secondary={"Tareas normales: " + element.tareasNormales + "   " + "Tareas urgentes: " + element.tareasUrgentes} />
                                     </ListItem>
                                 )}
                             </List>
@@ -257,9 +269,9 @@ const AsignarIncidencias = () => {
                 <Col>
                     <h3 style={{ color: 'white', marginTop: "20px" }}>Determina la prioridad</h3>
                     <dropdown>
-                        <div class="sidebar-box"><select id="idReporte">
-                            <option value="">NORMAL</option>
-                            <option value="">URGENTE</option>
+                        <div class="sidebar-box"><select id="prioridad"  onChange={e => cambioPrioridad(e.target.value)}>
+                            <option value="NORMAL">NORMAL</option>
+                            <option value="URGENTE">URGENTE</option>
                         </select></div>
                     </dropdown>
                 </Col>

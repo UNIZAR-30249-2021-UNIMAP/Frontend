@@ -14,7 +14,7 @@ export default function InicioSesion() {
   const botonLogin = async e => {
     e.preventDefault();
     Login(correo, pass).then(res => {
-      if (!res.data) {
+      if (!res.data || JSON.stringify(res.data) == "-1") {
         console.log("Error")
         swal({
           title: "Error",

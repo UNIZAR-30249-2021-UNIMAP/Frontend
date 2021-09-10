@@ -18,9 +18,10 @@ const PLANTA3 = 'proyecto:adap03,proyecto:torresp03,proyecto:betanp03'
 const PLANTA4 = 'proyecto:adap04'
 const SOTANO1 = 'proyecto:adas01,proyecto:torress01,proyecto:betans01'
 const { BaseLayer } = LayersControl;
+var idEspacio = "Seleccione un espacio"
+export { idEspacio }
 
 const Map = (size) => {
-    const [idEspacio, setIdEspacio] = useState("Seleccione un espacio")
 
     function AddMarkerToClick() {
 
@@ -33,12 +34,10 @@ const Map = (size) => {
                 const newMarker = e.latlng;
                 var lat = e.latlng.lat;
                 var lng = e.latlng.lng;
-                console.log("El marker está: " + newMarker)
                 newMarker.lat = newMarker.lat + 0.00015
                 newMarker.lng = newMarker.lng - 0.000065
                 setMarkers(newMarker);
                 var res = proj4(epsg, [lng, lat]);
-                console.log("Coordenadas: " + res)
                 switch (layer) {
                     case "Planta calle":
                         planta = PLANTA_CALLE
@@ -62,7 +61,16 @@ const Map = (size) => {
                         planta = PLANTA_CALLE
                         break;
                 }
-                ObtenerNombreSala(planta, res);
+                ObtenerNombreSala(planta, res).then(res => {
+                    if (!res.data) {
+                      console.log("Error")
+                    } else {
+                        if (res.data.features[0] != undefined) {
+                            var id = JSON.stringify(res.data.features[0].id)
+                            idEspacio = id
+                        }
+                    }
+                  })
             },
         })
 
@@ -179,5 +187,6 @@ const Map = (size) => {
 
     );
 }
+
 
 export default Map;

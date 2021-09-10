@@ -4,6 +4,7 @@ import { Col, Row } from "react-bootstrap";
 import '../Styles/Reporte.css';
 
 import Map from "../../Utils/map"
+import { idEspacio } from "../../Utils/map"
 
 import photo from './../../Assets/photo.png';
 import { TextField } from "@material-ui/core";
@@ -22,16 +23,20 @@ const Reporte = () => {
     e.preventDefault();
     console.log("El email es" + email + " y la descripción es " + descripcion)
     //TODO: MIRAR SUBIR IMAGENES
-    ReportarIncidencia(email, descripcion, Map.idEspacio);
+    console.log("id espacio: ")
+    console.log(idEspacio)
+    ReportarIncidencia(email, descripcion, idEspacio, base64TextString);
   }
   async function onChange(e) {
     let archivo = e.target.files[0];
     if (archivo) {
-      console.log(await toBase64(archivo));
+      setBase64(await toBase64(archivo))
+      console.log(base64TextString)
     }
   }
   const toBase64 = archivo => new Promise((resolve, reject) => {
     const reader = new FileReader();
+    console.log("archivo: " + archivo)
     reader.readAsDataURL(archivo);
     reader.onload = () => resolve(reader.result);
     reader.onerror = error => reject(error);

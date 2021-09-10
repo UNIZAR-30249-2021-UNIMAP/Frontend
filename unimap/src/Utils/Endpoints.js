@@ -21,28 +21,18 @@ export const Registrarse = (correo, contrasena, usuario) => {
 
 //TODO: pasar cadena vacia  en aquellos campos que no se modifiquen
 export const ObtenerNombreSala = (planta, res) => {
-  axios.request({
+  return axios.request({
     url: 'http://localhost:8080/geoserver/proyecto/ows?service' +
       '=WFS&version=1.0.0&request=GetFeature&typeName=' + planta + '&outputFormat=application%2Fjson&BBOX='
       + res[0] + ',' + res[1] + ',' + res[0] + ',' + res[1] + '&propertyName=id',
     method: 'get',
-  }).then(res => {
-    if (!res.data) {
-      console.log("Error")
-    } else {
-      if (res.data.features.length > 0) {
-        console.log("El endpoint nos devuelve: " + JSON.stringify(res.data.features[0].id))
-      } else {
-        console.log("No se ha encontrado ninguna sala")
-      }
-    }
   })
 }
 
 //TODO: imagen
-export const ReportarIncidencia = (email, descripcion, idEspacio) => {
+export const ReportarIncidencia = (email, descripcion, idEspacio, imagen) => {
   return axios.request({
-    url: 'http://localhost:7000/incidencia/reporte?email=' + email + '&descripcion=' + descripcion + '&idEspacio=' + idEspacio + '&imagen=THIS IS A TEST',
+    url: 'http://localhost:7000/incidencia/reporte?email=' + email + '&descripcion=' + descripcion + '&idEspacio=' + idEspacio + '&imagen= TEST',
     method: 'post',
   }).then(res => {
     if (!res.data) {
@@ -53,24 +43,35 @@ export const ReportarIncidencia = (email, descripcion, idEspacio) => {
         icon: "error"
       });
     } else {
-      console.log("El endpoint nos devuelve: " + res.data)
+      swal({
+        title: `Incidencia reportada con éxito en el espacio ${idEspacio}`,
+        button: true
+      }).then( _ => {
+          window.location.reload()
+      });
     }
   })
 }
 
 export const AceptarIncidencia = (idIncidencia, idEmpleado, prioridad) => {
   return axios.request({
-    url: 'http://localhost:7000/incidencia/administrador?idIncidencia=' + idIncidencia + '&idEmpleado=' + idEmpleado + '&prioridad=' + prioridad + '&aceptar=' + "aceptar" + '&motivo=' + null,
+    url: 'http://localhost:7000/incidencia/administrador?idIncidencia=' + idIncidencia + '&idEmpleado=' + idEmpleado + '&prioridad=' + prioridad + '&aceptar=' + true + '&motivo=' + null,
     method: 'post',
   }).then(res => {
-    if (!res.data) {
+    if (!res.data || res.data == "error") {
       console.log("Error")
       swal({
         title: "Error",
-        text: "No se a podidio realizar la operacion",
+        text: "El personal seleccionado ya tiene el máximo de tareas de este tipo",
         icon: "error"
       });
     } else {
+      swal({
+        title: `Incidencia asignada con éxito con prioridad ${prioridad}`,
+        button: true
+      }).then( _ => {
+          window.location.reload()
+      });
       console.log("Incidencia asignada: " + res.data)
     }
   })
@@ -78,7 +79,7 @@ export const AceptarIncidencia = (idIncidencia, idEmpleado, prioridad) => {
 
 export const RechazarIncidencia = (idIncidencia, motivo) => {
   return axios.request({
-    url: 'http://localhost:7000/incidencia/administrador?idIncidencia=' + idIncidencia + '&idEmpleado=' + null + '&prioridad=' + null + '&aceptar=' + "denegar" + '&motivo=' + motivo,
+    url: 'http://localhost:7000/incidencia/administrador?idIncidencia=' + idIncidencia + '&idEmpleado=-1' + '&prioridad=' + null + '&aceptar=' + false + '&motivo=' + motivo,
     method: 'post',
   }).then(res => {
     if (!res.data) {
@@ -89,6 +90,12 @@ export const RechazarIncidencia = (idIncidencia, motivo) => {
         icon: "error"
       });
     } else {
+      swal({
+        title: `Incidencia rechazada correctamente`,
+        button: true
+      }).then( _ => {
+          window.location.reload()
+      });
       console.log("Incidencia denegada: " + res.data)
     }
   })
@@ -97,18 +104,7 @@ export const RechazarIncidencia = (idIncidencia, motivo) => {
 export const ObtenerIncidencias = () => {
   return axios.request({
     url: 'http://localhost:7000/incidencia',
-    method: 'get',
-  }).then(res => {
-    if (!res.data) {
-      console.log("Error")
-      swal({
-        title: "Error",
-        text: "No se a podidio realizar la operacion",
-        icon: "error"
-      });
-    } else {
-      console.log("Lista incidencias: " + res.data)
-    }
+    method: 'get'
   })
 }
 
@@ -152,18 +148,7 @@ export const FinIncidenciaMant = (idIncidencia) => {
 export const ObtenerCargaTrabajoEmpleadosMant = () => {
   return axios.request({
     url: 'http://localhost:7000/mantenimiento',
-    method: 'get',
-  }).then(res => {
-    if (!res.data) {
-      console.log("Error")
-      swal({
-        title: "Error",
-        text: "No se a podidio realizar la operacion",
-        icon: "error"
-      });
-    } else {
-      console.log("Lista devuelta: " + res.data)
-    }
+    method: 'get'
   })
 }
 
