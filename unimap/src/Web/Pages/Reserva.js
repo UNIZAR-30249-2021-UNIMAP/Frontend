@@ -11,7 +11,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
-import { ObtenerEspacios } from "../../Utils/Endpoints";
+import { ObtenerEspacios, ReservarEspacio } from "../../Utils/Endpoints";
 
 const divStyle = {
     display: 'flex',
@@ -24,6 +24,8 @@ const Reserva = () => {
     var edificio = ""
     var planta = ""
     var tipoSala = ""
+    var email = ""
+    var idSala = ""
 
     const handlerFiltroProyector = element => async e => {
         console.log("entro filtro")
@@ -44,6 +46,10 @@ const Reserva = () => {
 
     const handleFiltroClick = element => async e => {
         ObtenerEspacios(proyector, edificio, planta, tipoSala, fechaInicio, fechaFin)
+    }
+
+    const handleReservaClick = element => async e => {
+        ReservarEspacio(idSala, email, fechaInicio, fechaFin)
     }
 
     return (
@@ -154,7 +160,7 @@ const Reserva = () => {
                             </Col>
 
                             <buttonReserve>
-                                <input type="submit" onSubmit={console.log(fechaInicio)} value="       Reservar espacio       " size="20" />
+                                <input type="submit" onSubmit={handleReservaClick()} value="       Reservar espacio       " size="20" />
                             </buttonReserve>
                         </div>
                     </Col>

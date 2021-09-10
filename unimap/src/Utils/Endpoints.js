@@ -189,6 +189,24 @@ export const ObtenerEspacios = (proyector, edificio, planta, tipoSala, fechaInic
   })
 }
 
+export const ReservarEspacio = (idSala, email, fechaInicio, fechaFin) => {
+  return axios.request({
+    url: 'http://localhost:7000/espacio?'+'&idSala=' +idSala + '&email=' + email  + '&fechaInicio=' + fechaInicio+ '&fechaFin=' + fechaFin,
+    method: 'post',
+  }).then(res => {
+    if (!res.data) {
+      console.log("Error")
+      swal({
+        title: "Error",
+        text: "No se a podidio realizar la operacion",
+        icon: "error"
+      });
+    } else {
+      console.log("Info espacio devueltas: " + res.data)
+    }
+  })
+}
+
 export const GetTest = () => {
   var response = axios.request({
     url: 'https://servicios.ine.es/wstempus/js/ES/OPERACIONES_DISPONIBLES',
