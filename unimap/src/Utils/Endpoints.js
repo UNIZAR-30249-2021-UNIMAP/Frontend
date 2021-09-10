@@ -189,10 +189,17 @@ export const ObtenerEspacio = (idEspacio) => {
   })
 }
 
-export const ObtenerEspacios = (proyector, edificio, planta, tipoSala, fechaInicio, fechaFin) => {
+export const ObtenerEspacios = (proyector, edificio, tipoSala, fechaInicio, fechaFin) => {
   return axios.request({
-    url: 'http://localhost:7000/espacios?proyector=' +  proyector + '&edificio=' +edificio + '&planta=' + planta + '&tipoSala=' + tipoSala + '&fechaInicio=' + fechaInicio+ '&fechaFin=' + fechaFin,
+    url: 'http://localhost:7000/espacios?proyector=' +  proyector + '&edificio=' +edificio  + '&tipoSala=' + tipoSala + '&fechaInicio=' + fechaInicio+ '&fechaFin=' + fechaFin,
     method: 'get',
+  })
+}
+
+export const ReservarEspacio = (idSala, email, fechaInicio, fechaFin) => {
+  return axios.request({
+    url: 'http://localhost:7000/espacio?'+'&idSala=' +idSala + '&email=' + email  + '&fechaInicio=' + fechaInicio+ '&fechaFin=' + fechaFin,
+    method: 'post',
   }).then(res => {
     if (!res.data) {
       console.log("Error")
@@ -202,6 +209,10 @@ export const ObtenerEspacios = (proyector, edificio, planta, tipoSala, fechaInic
         icon: "error"
       });
     } else {
+      swal({
+        title: `Espacio ${idSala} reservado con éxito`,
+        button: true
+      })
       console.log("Info espacio devueltas: " + res.data)
     }
   })
