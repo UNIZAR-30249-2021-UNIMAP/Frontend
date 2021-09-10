@@ -175,17 +175,6 @@ export const ObtenerEspacios = (proyector, edificio, planta, tipoSala, fechaInic
   return axios.request({
     url: 'http://localhost:7000/espacios?proyector=' +  proyector + '&edificio=' +edificio + '&planta=' + planta + '&tipoSala=' + tipoSala + '&fechaInicio=' + fechaInicio+ '&fechaFin=' + fechaFin,
     method: 'get',
-  }).then(res => {
-    if (!res.data) {
-      console.log("Error")
-      swal({
-        title: "Error",
-        text: "No se a podidio realizar la operacion",
-        icon: "error"
-      });
-    } else {
-      console.log("Info espacio devueltas: " + res.data)
-    }
   })
 }
 

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { Checkbox } from '@material-ui/core';
-
+import { List, ListItem, ListItemText } from '@material-ui/core';
+import swal from 'sweetalert';
 import Map from "../../Utils/map"
 
 import '../Styles/Reporte.css';
@@ -13,6 +14,18 @@ import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 import { ObtenerEspacios, ReservarEspacio } from "../../Utils/Endpoints";
 
+const scrollboxStryle = {
+    overflowY: 'scroll',
+    border: '1px solid red',
+    width: '700px',
+    float: 'left',
+    height: '500px',
+    position: 'relative',
+    marginLeft: '20px',
+    backgroundColor: 'white'
+
+};
+
 const divStyle = {
     display: 'flex',
     alignItems: 'center'
@@ -20,6 +33,10 @@ const divStyle = {
 const Reserva = () => {
     const [fechaInicio, setFechaInicio] = useState(null);
     const [fechaFin, setFechaFin] = useState(null);
+    const [listaEspacios, setListaEspacios] = useState([1, 2])
+    const [listaEspaciosMostrados, setListaEspaciosMostrados] = useState([1, 2])
+    const [espacioMostrar, setEspacioMostrar] = useState("Selecciona espacio");
+    const [espacioClick, setEspacioClick] = useState("");
     var proyector = ""
     var edificio = ""
     var planta = ""
@@ -45,11 +62,32 @@ const Reserva = () => {
     }
 
     const handleFiltroClick = element => async e => {
-        ObtenerEspacios(proyector, edificio, planta, tipoSala, fechaInicio, fechaFin)
+        ObtenerEspacios(proyector, edificio, planta, tipoSala, fechaInicio, fechaFin).then(res => {
+            console.log("datos obtener espacios: ")
+            console.log(res.data)
+            if (!res.data) {
+                //console.log("Error")
+                swal({
+                    title: "Error",
+                    text: "No se a podidio realizar la operacion",
+                    icon: "error"
+                });
+            } else {
+                var array = []
+                res.data.forEach(function (item) {
+                    array.push(JSON.parse(JSON.stringify(item)))
+                })
+                setListaEspacios(array)
+                setListaEspaciosMostrados(array)
+            }
+        })
     }
-
+    const handleEspacioClick = element => async e => {
+        setEspacioMostrar("Espacio seleccionado: " +element);
+        setEspacioClick(element.id);
+    }
     const handleReservaClick = element => async e => {
-        ReservarEspacio(idSala, email, fechaInicio, fechaFin)
+        ReservarEspacio(espacioClick, email, fechaInicio, fechaFin)
     }
 
     return (
@@ -118,26 +156,23 @@ const Reserva = () => {
                             showTimeSelect
                             dateFormat="Pp" />
                     </Col>
-                    <div style={{ color: 'white', marginLeft: '10px' }}>
-                        <FormControlLabel
-                            control={<Checkbox />}
-                            label="Semanal"
-                        />
-                    </div>
                     <input type="submit" value="       Filtrar       " size="20" onClick={e => handleFiltroClick()}/>
                 </div>
             </Row>
             <Row>
                 <div style={divStyle}>
-                    {Map("mapMedium")}
+                    <Row style={scrollboxStryle}>
+                            <List>
+                                {listaEspaciosMostrados.map((element) =>
+                                    <ListItem button onClick={handleEspacioClick(element)}>
+                                        <ListItemText primary={element} />
+                                    </ListItem>
+                                )}
+                            </List>
+                        </Row>
 
                     <Col style={{ marginLeft: '-100px' }}>
-                        <anothertext>
-                            <h2 style={{ color: 'white' }}>Espacio </h2>
-                        </anothertext>
-                        <anothertext>
-                            <textarea type="text" name="name" id="name" cols="40" rows="2" />
-                        </anothertext>
+                        
                         <anothertext>
                             <h2 style={{ color: 'white' }}>Nombre completo</h2>
                         </anothertext>
@@ -158,10 +193,12 @@ const Reserva = () => {
                                     <input type="tel" name="name" id="name" cols="12" rows="2" />
                                 </anothertext>
                             </Col>
-
+                             <Col>   
+                             <h3 style={{ color: "white" }}>{espacioMostrar}</h3>   
                             <buttonReserve>
                                 <input type="submit" onSubmit={handleReservaClick()} value="       Reservar espacio       " size="20" />
                             </buttonReserve>
+                            </Col>
                         </div>
                     </Col>
                 </div>
