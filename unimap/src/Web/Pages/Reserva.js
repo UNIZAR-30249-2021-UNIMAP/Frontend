@@ -11,7 +11,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
-
+import { ObtenerEspacios } from "../../Utils/Endpoints";
 
 const divStyle = {
     display: 'flex',
@@ -20,6 +20,32 @@ const divStyle = {
 const Reserva = () => {
     const [fechaInicio, setFechaInicio] = useState(null);
     const [fechaFin, setFechaFin] = useState(null);
+    var proyector = ""
+    var edificio = ""
+    var planta = ""
+    var tipoSala = ""
+
+    const handlerFiltroProyector = element => async e => {
+        console.log("entro filtro")
+        proyector = element;
+    }
+    const handlerFiltroEdificio = element => async e => {
+        console.log("entro filtro")
+        edificio = element;
+    }
+    const handlerFiltroPlanta = element => async e => {
+        console.log("entro filtro")
+        planta = element;
+    }
+    const handlerFiltroEspacio = element => async e => {
+        console.log("entro filtro")
+        tipoSala = element;
+    }
+
+    const handleFiltroClick = element => async e => {
+        ObtenerEspacios(proyector, edificio, planta, tipoSala, fechaInicio, fechaFin)
+    }
+
     return (
 
         <Col>
@@ -27,24 +53,24 @@ const Reserva = () => {
                 <div style={divStyle}>
 
                     <dropdown style={{ marginLeft: '30px' }}>
-                        <div class="sidebar-box"><select id="equipo">
-                            <option value="">Con proyector</option>
-                            <option value="">Sin proyector</option>
+                        <div class="sidebar-box"><select id="proyector" onChange={e => handlerFiltroProyector(e.target.value)}>
+                            <option value="true">Con proyector</option>
+                            <option value="false">Sin proyector</option>
                             <option value="">Indiferente</option>
                         </select></div>
 
                     </dropdown>
 
                     <dropdown style={{ marginLeft: '10px' }}>
-                        <div class="sidebar-box"><select id="equipo">
-                            <option value="">Ada Byron</option>
-                            <option value="">Torres Quevedo</option>
-                            <option value="">Betancourt</option>
+                        <div class="sidebar-box"><select id="edificio" onChange={e => handlerFiltroEdificio(e.target.value)}>
+                            <option value="ada">Ada Byron</option>
+                            <option value="torres">Torres Quevedo</option>
+                            <option value="betan">Betancourt</option>
                         </select></div>
                     </dropdown>
 
                     <dropdown style={{ marginLeft: '10px' }}>
-                        <div class="sidebar-box"><select id="equipo">
+                        <div class="sidebar-box"><select id="planta" onChange={e => handlerFiltroPlanta(e.target.value)}>
                             <option value="">Planta 0</option>
                             <option value="">Planta 1</option>
                             <option value="">Planta 2</option>
@@ -53,7 +79,7 @@ const Reserva = () => {
                     </dropdown>
 
                     <dropdown style={{ marginLeft: '10px' }}>
-                        <div class="sidebar-box"><select id="equipo">
+                        <div class="sidebar-box"><select id="tipoSala" onChange={e => handlerFiltroEspacio(e.target.value)}>
                             <option value="">Aula</option>
                             <option value="">Laboratorio</option>
                         </select></div>
@@ -92,7 +118,7 @@ const Reserva = () => {
                             label="Semanal"
                         />
                     </div>
-                    <input type="submit" value="       Filtrar       " size="20" />
+                    <input type="submit" value="       Filtrar       " size="20" onClick={e => handleFiltroClick()}/>
                 </div>
             </Row>
             <Row>
