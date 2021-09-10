@@ -14,7 +14,7 @@ export default function InicioSesion() {
   const botonLogin = async e => {
     e.preventDefault();
     Login(correo, pass).then(res => {
-      if (!res.data || JSON.stringify(res.data) == "-1") {
+      if (!res.data.id || JSON.stringify(res.data.id) == "-1") {
         console.log("Error")
         swal({
           title: "Error",
@@ -23,12 +23,14 @@ export default function InicioSesion() {
         });
       } else {
         console.log("El endpoint nos devuelve: " + JSON.stringify(res.data))
-        if (JSON.stringify(res.data) == "1")
+        window.content.localStorage["idPersonalMantenimiento"] = res.data.id;
+        
+        if (JSON.stringify(res.data.id) == "1")
           nuevaPagina.push('/');
-        else if (JSON.stringify(res.data) == "2")
-          nuevaPagina.push('/AsignarTareas');
+        else if (JSON.stringify(res.data.id) == "2")
+          nuevaPagina.push('/AsignarTareas')
         else
-          nuevaPagina.push('/EmpleadoMantenimiento');
+          nuevaPagina.push('/EmpleadoMantenimiento')
       }
     })
 

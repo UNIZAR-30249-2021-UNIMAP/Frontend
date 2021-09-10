@@ -31,9 +31,15 @@ export const ObtenerNombreSala = (planta, res) => {
 
 //TODO: imagen
 export const ReportarIncidencia = (email, descripcion, idEspacio, imagen) => {
+  var bodyFormData = new FormData();
+  bodyFormData.append('email', email)
+  bodyFormData.append('descripcion', descripcion)
+  bodyFormData.append('idEspacio', idEspacio)
+  bodyFormData.append('imagen', imagen)
   return axios.request({
-    url: 'http://localhost:7000/incidencia/reporte?email=' + email + '&descripcion=' + descripcion + '&idEspacio=' + idEspacio + '&imagen= TEST',
+    url: 'http://localhost:7000/incidencia/reporte',
     method: 'post',
+    data: bodyFormData
   }).then(res => {
     if (!res.data) {
       console.log("Error")
@@ -109,27 +115,16 @@ export const ObtenerIncidencias = () => {
 }
 
 //TODO Discutir param
-export const ObtenerIncidenciasEmpleadoMant = () => {
+export const ObtenerIncidenciasEmpleadoMant = (idPersonalMantenimiento) => {
   return axios.request({
-    url: 'http://localhost:7000/incidencia/mantenimiento',
+    url: 'http://localhost:7000/incidencia/mantenimiento?ID=' + idPersonalMantenimiento,
     method: 'get',
-  }).then(res => {
-    if (!res.data) {
-      console.log("Error")
-      swal({
-        title: "Error",
-        text: "No se a podidio realizar la operacion",
-        icon: "error"
-      });
-    } else {
-      console.log("Incidencias devueltas: " + res.data)
-    }
   })
 }
 
 export const FinIncidenciaMant = (idIncidencia) => {
   return axios.request({
-    url: 'http://localhost:7000/incidencia/mantenimiento',
+    url: 'http://localhost:7000/incidencia/mantenimiento?idIncidencia=' + idIncidencia,
     method: 'post',
   }).then(res => {
     if (!res.data) {
@@ -141,6 +136,12 @@ export const FinIncidenciaMant = (idIncidencia) => {
       });
     } else {
       console.log("Incidencias finalizada: " + res.data)
+      swal({
+        title: `Incidencia finalizada correctamente`,
+        button: true
+      }).then( _ => {
+          window.location.reload()
+      });
     }
   })
 }

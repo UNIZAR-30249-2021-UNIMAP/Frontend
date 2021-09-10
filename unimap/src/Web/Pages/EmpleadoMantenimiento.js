@@ -10,7 +10,7 @@ import swal from 'sweetalert';
 
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
-import { ObtenerIncidenciasEmpleadoMant, GetTest } from "../../Utils/Endpoints";
+import { ObtenerIncidenciasEmpleadoMant, FinIncidenciaMant } from "../../Utils/Endpoints";
 
 const divStyle = {
     display: 'flex',
@@ -36,12 +36,15 @@ const EmpleadoMantenimiento = () => {
     const [idReporte, setIdReporte] = useState("");
     const [prio, setPrio] = useState("");
     const [motivo, setMotivo] = useState("");
+    const [idIncidenciaClick, setIncidenciaClick] = useState("");
+    const [incidenciaMostrar, setincidenciaMostrar] = useState("Selecciona una incidencia");
     const [listaIncidenciasMostrada, setListaIncidenciasMostrada] = useState([1, 2])
     var lista = ({"tareasNormales":[{"descripcion":"asdasdas","estado":"PENDIENTE","idEspacio":"undefined","reportadoTimeStamp":"2021-09-10 08:47:11.7537","id":358590,"prioridad":"NORMAL"},{"descripcion":"2","estado":"PENDIENTE","idEspacio":"undefined","reportadoTimeStamp":"2021-09-10 08:48:57.411329","id":358591,"prioridad":"NORMAL"},{"descripcion":"mapa","estado":"PENDIENTE","idEspacio":"undefined","reportadoTimeStamp":"2021-09-10 08:37:04.889727","id":358588,"prioridad":"NORMAL"},{"descripcion":"asdf","estado":"PENDIENTE","idEspacio":"adap04.43","reportadoTimeStamp":"2021-09-10 08:55:14.820887","id":358592,"prioridad":"NORMAL"}],"tareasUrgentes":[{"descripcion":"incidencia creada desde front","estado":"PENDIENTE","idEspacio":"undefined","reportadoTimeStamp":"2021-09-10 08:10:26.69195","id":358586,"prioridad":"URGENTE"}]})
     var filtro
+
     const botonFinalizar = async e => {
         e.preventDefault();
-        //EndTask(idReport);
+        FinIncidenciaMant(idIncidenciaClick, window.content.localStorage["idPersonalMantenimiento"])
     }
 
     const cambioFiltro = filtroNuevo => {
@@ -86,7 +89,7 @@ const EmpleadoMantenimiento = () => {
     async function cogerDatos() {
         //e.preventDefault();
         //ObtenerIncidenciasEmpleadoMant().then(res => {
-        GetTest().then(res => {
+        ObtenerIncidenciasEmpleadoMant(window.content.localStorage["idPersonalMantenimiento"]).then(res => {
             console.log("datos obtener incidencias: ")
             console.log(res.data)
             if (!res.data) {
@@ -101,7 +104,6 @@ const EmpleadoMantenimiento = () => {
                 //console.log("Informacion try sin tratar" + res.data)
                 //console.log("Info espacio devueltas: " + JSON.stringify(res.data))
                 var array = []
-                res.data = lista
                 res.data.tareasNormales.forEach(function (item) {
                     array.push(JSON.parse(JSON.stringify(item)))
                 })
@@ -113,6 +115,12 @@ const EmpleadoMantenimiento = () => {
         }
         );
     }
+
+    const handlerIncidenciaClick = element => async e => {
+        setincidenciaMostrar(element.descripcion)
+        setIncidenciaClick(element.id)
+    }
+
     useEffect(() => {
         cogerDatos();
     }, []);
@@ -136,6 +144,7 @@ const EmpleadoMantenimiento = () => {
                                 </select></div>
                             </dropdown>
                         </Col>
+                        <h3 style={{ color: "white" }}>{incidenciaMostrar}</h3>
                         <Col>
                             <input style={{ marginTop: '14px' }} type="submit" value="       Finalizar       " size="20" onClick={botonFinalizar} />
                         </Col>
@@ -149,7 +158,7 @@ const EmpleadoMantenimiento = () => {
                         <Row style={scrollboxStryle}>
                             <List>
                                 {listaIncidenciasMostrada.map((element) =>
-                                    <ListItem button >
+                                    <ListItem button onClick={handlerIncidenciaClick(element)}>
                                         <ListItemText primary={element.id} secondary={"Estado: " + element.estado + "   " + "Prioridad: " + element.prioridad  + " Fecha reporte: " + element.reportadoTimeStamp  + " Espacio: " + element.idEspacio} />
                                     </ListItem>
                                 )}
