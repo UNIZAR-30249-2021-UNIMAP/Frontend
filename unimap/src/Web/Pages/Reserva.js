@@ -39,10 +39,10 @@ const Reserva = () => {
     const [espacioClick, setEspacioClick] = useState("");
     var proyector = ""
     var edificio = ""
-    var planta = ""
     var tipoSala = ""
     var email = ""
-    var idSala = ""
+    var fechaYDia = ""
+    var fechaYDiaFin = ""
 
     const handlerFiltroProyector = element => async e => {
         console.log("entro filtro")
@@ -52,17 +52,19 @@ const Reserva = () => {
         console.log("entro filtro")
         edificio = element;
     }
-    const handlerFiltroPlanta = element => async e => {
-        console.log("entro filtro")
-        planta = element;
-    }
     const handlerFiltroEspacio = element => async e => {
         console.log("entro filtro")
         tipoSala = element;
     }
 
+    function parsearFecha(date, variable) {
+        var aux = JSON.stringify(date)
+        aux = aux.split("T")
+        variable = aux[0]+" "+aux[1]
+    }
+
     const handleFiltroClick = element => async e => {
-        ObtenerEspacios(proyector, edificio, planta, tipoSala, fechaInicio, fechaFin).then(res => {
+        ObtenerEspacios(proyector, edificio, tipoSala, fechaInicio, fechaFin).then(res => {
             console.log("datos obtener espacios: ")
             console.log(res.data)
             if (!res.data) {
@@ -87,7 +89,12 @@ const Reserva = () => {
         setEspacioClick(element.id);
     }
     const handleReservaClick = element => async e => {
-        ReservarEspacio(espacioClick, email, fechaInicio, fechaFin)
+        parsearFecha(fechaInicio, fechaYDia)
+        parsearFecha(fechaFin, fechaYDiaFin)
+        if(fechaYDiaFin > fechaYDia){
+            ReservarEspacio(espacioClick, email, fechaYDia, fechaYDiaFin)
+        }
+        
     }
 
     return (
@@ -110,32 +117,19 @@ const Reserva = () => {
                             <option value="ada">Ada Byron</option>
                             <option value="torres">Torres Quevedo</option>
                             <option value="betan">Betancourt</option>
-                        </select></div>
-                    </dropdown>
-
-                    <dropdown style={{ marginLeft: '10px' }}>
-                        <div class="sidebar-box"><select id="planta" onChange={e => handlerFiltroPlanta(e.target.value)}>
-                            <option value="">Planta 0</option>
-                            <option value="">Planta 1</option>
-                            <option value="">Planta 2</option>
                             <option value="">Indiferente</option>
                         </select></div>
                     </dropdown>
 
                     <dropdown style={{ marginLeft: '10px' }}>
                         <div class="sidebar-box"><select id="tipoSala" onChange={e => handlerFiltroEspacio(e.target.value)}>
-                            <option value="">Aula</option>
-                            <option value="">Laboratorio</option>
+                            <option value="AULA">Aula</option>
+                            <option value="LAB">Laboratorio</option>
+                            <option value="DESPACHO">Despacho</option>
+                            <option value="SEMINARIO">Seminario</option>
                         </select></div>
                     </dropdown>
-                    <Col style={{ marginLeft: '70px' }}>
-                        <text>
-                            <h2 style={{ color: 'white' }}>Aforo mínimo</h2>
-                        </text>
-                        <text>
-                            <textarea type="text" name="name" id="name" cols="15" rows="1" />
-                        </text>
-                    </Col>
+                    
                     <Col style={{ marginLeft: '10px' }}>
                         <text>
                             <h2 style={{ color: 'white' }}>Fecha inicio</h2>
