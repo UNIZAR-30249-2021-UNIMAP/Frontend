@@ -6,7 +6,7 @@ import { Marker, Popup } from 'react-leaflet'
 import { MarkerIcon } from './react-leaflet-icon.js'
 import { WMSTileLayer, LayersControl } from 'react-leaflet';
 import proj4 from "proj4"
-import { ObtenerNombreSala } from "./Endpoints.js";
+import { ObtenerCoordenadas, ObtenerNombreCapa, ObtenerNombreSala } from "./Endpoints.js";
 import TextArea from "antd/lib/input/TextArea";
 
 const geoserverUrl = "http://localhost:8080/geoserver/wms?service=WMS"
@@ -69,6 +69,24 @@ const Map = (size) => {
                             var id = JSON.stringify(res.data.features[0].id)
                             idEspacio = id
                         }
+                    }
+                  })
+                  ObtenerNombreCapa(planta, res).then(res => {
+                    if (!res.data) {
+                      console.log("Error")
+                    } else {
+                        if (res.data.features[0] != undefined) {
+                            var idLayer = JSON.stringify(res.data.features[0].properties.layer)
+                            console.log("idLayer: " + idLayer)
+                        }
+                    }
+                  })
+
+                  ObtenerCoordenadas(planta, idEspacio).then(res => {
+                    if (!res.data) {
+                      console.log("Error")
+                    } else {
+                        console.log("res.data coordendas" + JSON.stringify(res.data))
                     }
                   })
             },

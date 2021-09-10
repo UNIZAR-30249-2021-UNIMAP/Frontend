@@ -29,6 +29,24 @@ export const ObtenerNombreSala = (planta, res) => {
   })
 }
 
+export const ObtenerNombreCapa = (planta, res) => {
+  return axios.request({
+    url: 'http://localhost:8080/geoserver/proyecto/ows?service' +
+      '=WFS&version=1.0.0&request=GetFeature&typeName=' + planta + '&outputFormat=application%2Fjson&BBOX='
+      + res[0] + ',' + res[1] + ',' + res[0] + ',' + res[1] + '&propertyName=layer',
+    method: 'get',
+  })
+}
+
+export const ObtenerCoordenadas = (planta, nombreSala) => {
+  console.log("nombreSala: " + nombreSala)
+  return axios.request({
+    url: 'http://localhost:8080/geoserver/proyecto/ows?service=WFS&version=1.1.0&request=GetGMLObject&typeNames=' + planta + 
+    ':featuretype&featureID=' + nombreSala,
+    method: 'get',
+  })
+}
+
 //TODO: imagen
 export const ReportarIncidencia = (email, descripcion, idEspacio, imagen) => {
   var bodyFormData = new FormData();

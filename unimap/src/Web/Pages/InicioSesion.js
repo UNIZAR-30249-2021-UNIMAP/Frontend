@@ -14,7 +14,7 @@ export default function InicioSesion() {
   const botonLogin = async e => {
     e.preventDefault();
     Login(correo, pass).then(res => {
-      if (!res.data.id || JSON.stringify(res.data.id) == "-1") {
+      if (!res.data.id || JSON.stringify(res.data.tipoUsuario) == "-1") {
         console.log("Error")
         swal({
           title: "Error",
@@ -25,9 +25,9 @@ export default function InicioSesion() {
         console.log("El endpoint nos devuelve: " + JSON.stringify(res.data))
         window.content.localStorage["idPersonalMantenimiento"] = res.data.id;
         
-        if (JSON.stringify(res.data.id) == "1")
+        if (JSON.stringify(res.data.tipoUsuario) == "1")
           nuevaPagina.push('/');
-        else if (JSON.stringify(res.data.id) == "2")
+        else if (JSON.stringify(res.data.tipoUsuario) == "2")
           nuevaPagina.push('/AsignarTareas')
         else
           nuevaPagina.push('/EmpleadoMantenimiento')

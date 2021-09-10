@@ -126,9 +126,6 @@ const EmpleadoMantenimiento = () => {
     }, []);
     return (
         <div style={divStyle}>
-            <Col style={{ marginTop: '30px' }}>
-                {Map("mapSmall")}
-            </Col>
             <Col style={{ marginTop: '20px', marginLeft: '50px' }}>
                 <Row>
                     <div style={divStyle}>
