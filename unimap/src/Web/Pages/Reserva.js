@@ -30,51 +30,57 @@ const divStyle = {
     display: 'flex',
     alignItems: 'center'
 };
+
+var proyector = "true"
+var edificio = "ada"
+var tipoSala = "AULA"
+var email = ""
+var edificioReserva = ""
+
 const Reserva = () => {
     const [fechaInicio, setFechaInicio] = useState(null);
     const [fechaFin, setFechaFin] = useState(null);
-    const [listaEspacios, setListaEspacios] = useState([1, 2])
-    const [listaEspaciosMostrados, setListaEspaciosMostrados] = useState([1, 2])
+    const [listaEspacios, setListaEspacios] = useState([])
+    const [listaEspaciosMostrados, setListaEspaciosMostrados] = useState([])
     const [espacioMostrar, setEspacioMostrar] = useState("Selecciona espacio");
     const [espacioClick, setEspacioClick] = useState("");
-    var proyector = ""
-    var edificio = ""
-    var tipoSala = ""
-    var email = ""
-    var fechaYDia = ""
-    var fechaYDiaFin = ""
+    
 
-    const handlerFiltroProyector = element => async e => {
+    const handlerFiltroProyector = element => {
         console.log("entro filtro")
         proyector = element;
     }
-    const handlerFiltroEdificio = element => async e => {
+    const handlerFiltroEdificio = element => {
         console.log("entro filtro")
         edificio = element;
     }
-    const handlerFiltroEspacio = element => async e => {
+    const handlerFiltroEspacio = element => {
         console.log("entro filtro")
         tipoSala = element;
     }
 
-    function parsearFecha(date, variable) {
+    function parsearFecha(date) {
         var aux = JSON.stringify(date)
         aux = aux.split("T")
-        variable = aux[0]+" "+aux[1]
+        var fecha = aux[0]+" "+aux[1]
+        return fecha.replace(/['"]+/g, '')
     }
 
     const handleFiltroClick = element => async e => {
-        ObtenerEspacios(proyector, edificio, tipoSala, fechaInicio, fechaFin).then(res => {
+        var fechaYDia = parsearFecha(fechaInicio)
+        var fechaYDiaFin = parsearFecha(fechaFin)
+        ObtenerEspacios(proyector, edificio, tipoSala, fechaYDia, fechaYDiaFin).then(res => {
             console.log("datos obtener espacios: ")
-            console.log(res.data)
+            console.log(JSON.stringify(res.data))
             if (!res.data) {
                 //console.log("Error")
                 swal({
                     title: "Error",
-                    text: "No se a podidio realizar la operacion",
+                    text: "No se ha podido realizar la operacion",
                     icon: "error"
                 });
             } else {
+                console.log("res.data" + res.data)
                 var array = []
                 res.data.forEach(function (item) {
                     array.push(JSON.parse(JSON.stringify(item)))
@@ -84,15 +90,26 @@ const Reserva = () => {
             }
         })
     }
+
     const handleEspacioClick = element => async e => {
-        setEspacioMostrar("Espacio seleccionado: " +element);
-        setEspacioClick(element.id);
+        setEspacioMostrar("Espacio seleccionado: " + element.idEspacio);
+        setEspacioClick(element.idEspacio);
+        edificioReserva = edificio
     }
+
     const handleReservaClick = element => async e => {
-        parsearFecha(fechaInicio, fechaYDia)
-        parsearFecha(fechaFin, fechaYDiaFin)
+        var fechaYDia = parsearFecha(fechaInicio)
+        var fechaYDiaFin = parsearFecha(fechaFin)
+        var espacioParseado = espacioClick.split('.')
+        espacioParseado = espacioParseado[2] + "." + espacioParseado[3]
         if(fechaYDiaFin > fechaYDia){
-            ReservarEspacio(espacioClick, email, fechaYDia, fechaYDiaFin)
+            ReservarEspacio(edificioReserva, espacioParseado, email, fechaYDia, fechaYDiaFin)
+        } else {
+            swal({
+                title: "Error",
+                text: "No se ha podido realizar la operacion, comprueba los datos introducidos",
+                icon: "error"
+            });
         }
         
     }
@@ -150,7 +167,7 @@ const Reserva = () => {
                             showTimeSelect
                             dateFormat="Pp" />
                     </Col>
-                    <input type="submit" value="       Filtrar       " size="20" onClick={e => handleFiltroClick()}/>
+                    <input type="submit" value="       Filtrar       " size="20" onClick={handleFiltroClick()}/>
                 </div>
             </Row>
             <Row>
@@ -159,7 +176,7 @@ const Reserva = () => {
                             <List>
                                 {listaEspaciosMostrados.map((element) =>
                                     <ListItem button onClick={handleEspacioClick(element)}>
-                                        <ListItemText primary={element} />
+                                        <ListItemText primary={element.idEspacio} secondary={element.edificio + "     " + element.tipoDeEspacio} />
                                     </ListItem>
                                 )}
                             </List>
@@ -177,7 +194,7 @@ const Reserva = () => {
                             <h2 style={{ color: 'white' }}>Email</h2>
                         </anothertext>
                         <anothertext>
-                            <textarea type="email" name="name" id="name" cols="40" rows="2" pattern=".+@.\.com" />
+                            <textarea type="text" name="email" id="name" cols="40" rows="2" onChange={e => email = e.target.value}/>
                         </anothertext>
                         <div style={divStyle}>
                             <Col>
@@ -190,7 +207,7 @@ const Reserva = () => {
                              <Col>   
                              <h3 style={{ color: "white" }}>{espacioMostrar}</h3>   
                             <buttonReserve>
-                                <input type="submit" onSubmit={handleReservaClick()} value="       Reservar espacio       " size="20" />
+                                <input type="submit" onClick={handleReservaClick()} value="       Reservar espacio       " size="20" />
                             </buttonReserve>
                             </Col>
                         </div>

@@ -171,9 +171,9 @@ export const ObtenerCargaTrabajoEmpleadosMant = () => {
   })
 }
 
-export const ObtenerEspacio = (idEspacio) => {
+export const ObtenerEspacio = (idEspacio, idLayer) => {
   return axios.request({
-    url: 'http://localhost:7000/espacio?idSala=' + idEspacio,
+    url: 'http://localhost:7000/espacio?idEspacio=' + idEspacio + '&idLayer=' + idLayer,
     method: 'get',
   }).then(res => {
     if (!res.data) {
@@ -191,17 +191,25 @@ export const ObtenerEspacio = (idEspacio) => {
 
 export const ObtenerEspacios = (proyector, edificio, tipoSala, fechaInicio, fechaFin) => {
   return axios.request({
-    url: 'http://localhost:7000/espacios?proyector=' +  proyector + '&edificio=' +edificio  + '&tipoSala=' + tipoSala + '&fechaInicio=' + fechaInicio+ '&fechaFin=' + fechaFin,
+    url: 'http://localhost:7000/espacios?proyector=' +  proyector + '&edificio=' +edificio  + '&tipoEspacio=' + tipoSala + '&fechaInicio=' + fechaInicio+ '&fechaFin=' + fechaFin,
     method: 'get',
   })
 }
 
-export const ReservarEspacio = (idSala, email, fechaInicio, fechaFin) => {
+export const ReservarEspacio = (edificio, idSala, email, fechaInicio, fechaFin) => {
+  console.log("reserva espacio entra")
+  console.log(edificio)
+  console.log(idSala)
+  console.log(email)
+  console.log(fechaInicio)
+  console.log(fechaFin)
   return axios.request({
-    url: 'http://localhost:7000/espacio?'+'&idSala=' +idSala + '&email=' + email  + '&fechaInicio=' + fechaInicio+ '&fechaFin=' + fechaFin,
+    url: 'http://localhost:7000/espacio?'+'&idEspacio=' +idSala + '&email=' + email  + '&fechaInicio=' + fechaInicio+ 
+    '&fechaFin=' + fechaFin + '&edificio=' + edificio,
     method: 'post',
   }).then(res => {
-    if (!res.data) {
+    console.log("Reserva espacio: " + res.data)
+    if (!res.data || res.data == "error") {
       console.log("Error")
       swal({
         title: "Error",

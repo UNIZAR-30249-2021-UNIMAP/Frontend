@@ -73,11 +73,11 @@ const AsignarIncidencias = () => {
         console.log("fecha click=", fechaClick)
         if ((edificioClickado == "Todos" && fechaClick != "true"))
             return true;
-        else if (auxEdificio[0] == edificioClickado && fechaClick != "true")
+        else if (auxEdificio[0].includes(edificioClickado) && fechaClick != "true")
             return true
         else if (edificioClickado == "Todos" && comprobarFechaIgual(fechaComprobar, obj.reportadoTimeStamp))
             return true;
-        else if (auxEdificio[0] == edificioClickado && comprobarFechaIgual(fechaComprobar, obj.reportadoTimeStamp))
+        else if (auxEdificio[0].includes(edificioClickado) && comprobarFechaIgual(fechaComprobar, obj.reportadoTimeStamp))
             return true;
         else
             return false;
